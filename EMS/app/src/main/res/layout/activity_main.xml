@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.ems.ems.MainActivity">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/userView"
+        android:layout_width="350dp"
+        android:layout_height="200dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0"></android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/entryView"
+        android:layout_width="125dp"
+        android:layout_height="120dp"
+        app:layout_constraintBottom_toBottomOf="@id/userView"
+        app:layout_constraintEnd_toEndOf="@id/dashboardView"
+        app:layout_constraintStart_toStartOf="@id/dashboardView"
+        app:layout_constraintTop_toTopOf="@id/dashboardView"></android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/historyView"
+        android:layout_width="125dp"
+        android:layout_height="120dp"
+        tools:layout_editor_absoluteX="218dp"
+        tools:layout_editor_absoluteY="220dp"></android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/dashboardView"
+        android:layout_width="125dp"
+        android:layout_height="120dp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="345dp"></android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/clientView"
+        android:layout_width="125dp"
+        android:layout_height="120dp"
+        tools:layout_editor_absoluteX="218dp"
+        tools:layout_editor_absoluteY="345dp"></android.support.v7.widget.CardView>
+
+
+</android.support.constraint.ConstraintLayout>
