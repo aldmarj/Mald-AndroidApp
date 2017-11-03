@@ -18,39 +18,80 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0"></android.support.v7.widget.CardView>
+        app:layout_constraintVertical_bias="0">
+
+        <TextView
+            android:text="User Info"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
         android:id="@+id/entryView"
-        android:layout_width="125dp"
+        android:layout_width="150dp"
         android:layout_height="120dp"
+        android:clickable="true"
         app:layout_constraintBottom_toBottomOf="@id/userView"
         app:layout_constraintEnd_toEndOf="@id/dashboardView"
         app:layout_constraintStart_toStartOf="@id/dashboardView"
-        app:layout_constraintTop_toTopOf="@id/dashboardView"></android.support.v7.widget.CardView>
+        app:layout_constraintTop_toTopOf="@id/dashboardView">
+
+        <TextView
+            android:text="Data Entry"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </android.support.v7.widget.CardView>
 
 
     <android.support.v7.widget.CardView
         android:id="@+id/historyView"
-        android:layout_width="125dp"
+        android:layout_width="150dp"
         android:layout_height="120dp"
-        tools:layout_editor_absoluteX="218dp"
-        tools:layout_editor_absoluteY="220dp"></android.support.v7.widget.CardView>
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="@id/userView"
+        app:layout_constraintEnd_toEndOf="@id/userView"
+        app:layout_constraintTop_toTopOf="@id/clientView"
+        >
+
+        <TextView
+            android:text="History"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
         android:id="@+id/dashboardView"
-        android:layout_width="125dp"
+        android:layout_width="150dp"
         android:layout_height="120dp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="345dp"></android.support.v7.widget.CardView>
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/userView"
+        android:layout_marginBottom="8dp"
+        >
+        <TextView
+            android:text="Dashboard"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </android.support.v7.widget.CardView>
 
 
     <android.support.v7.widget.CardView
         android:id="@+id/clientView"
-        android:layout_width="125dp"
+        android:layout_width="150dp"
         android:layout_height="120dp"
-        tools:layout_editor_absoluteX="218dp"
-        tools:layout_editor_absoluteY="345dp"></android.support.v7.widget.CardView>
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/historyView"
+        android:layout_marginBottom="8dp">
+
+        <TextView
+            android:text="Client Info"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </android.support.v7.widget.CardView>
 
 
 </android.support.constraint.ConstraintLayout>
