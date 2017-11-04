@@ -6,4 +6,68 @@
     android:layout_height="match_parent"
     tools:context="com.ems.ems.DataEntryActivity">
 
+
+    <EditText android:id="@+id/edit_client"
+        android:layout_weight="1"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:hint="Client Info"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0"/>
+
+    <Button android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="pick time"
+        android:onClick="showTimePickerDialog"
+        app:layout_constraintBottom_toBottomOf="@+id/edit_client"
+        app:layout_constraintStart_toStartOf="@+id/edit_description"
+        app:layout_constraintTop_toTopOf="@+id/edit_description"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="pick date"
+        android:onClick="showDatePickerDialog"
+        app:layout_constraintBottom_toBottomOf="@+id/edit_client"
+        app:layout_constraintEnd_toEndOf="@+id/edit_description"
+        app:layout_constraintTop_toTopOf="@+id/edit_description"/>
+
+    <EditText
+        android:id="@+id/edit_description"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="Description"
+        android:inputType="textMultiLine"
+        android:lines="5"
+        android:layout_marginBottom="8dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="289dp"></EditText>
+
+    <Button
+        android:id="@+id/button_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="cancelEntry"
+        android:text="Cancel"
+        app:layout_constraintBottom_toBottomOf="@+id/edit_description"
+        app:layout_constraintStart_toStartOf="@+id/edit_description"
+         />
+
+    <Button
+        android:id="@+id/button_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="saveEntry"
+        android:text="save"
+        app:layout_constraintBottom_toBottomOf="@+id/edit_description"
+        app:layout_constraintEnd_toEndOf="@+id/edit_description"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1"/>
+
+
+
 </android.support.constraint.ConstraintLayout>
