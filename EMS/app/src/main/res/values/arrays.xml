@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="time_spent_list">
+        <item>@string/array_0.5</item>
+        <item>@string/array_1</item>
+        <item>@string/array_1.5</item>
+        <item>@string/array_2</item>
+    </string-array>
+</resources>

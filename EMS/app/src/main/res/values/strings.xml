@@ -14,4 +14,22 @@
         completions."
     </string>
     <string name="action_settings">Action Settings</string>
+    <string name="account_info">Account Info</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="text_favorites">favourites</string>
+    <string name="text_schedules">schedule</string>
+    <string name="text_music">music</string>
+    <string name="text_log_work">Log Work</string>
+    <string name="text_calendar">Calendar</string>
+    <string name="text_clients">Clients</string>
+    <string name="text_history">History</string>
+    <string name="text_dashboard">Dashboard</string>
+
+    <string name="text_time_spent">Time Spent</string>
+    <string name="array_0.5">0.5 Hours</string>
+    <string name="array_1">1 Hours</string>
+    <string name="array_1.5">1.5 Hours</string>
+    <string name="array_2">2 Hours</string>
+
+
 </resources>

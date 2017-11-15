@@ -1,23 +1,20 @@
 package com.ems.ems;
 
-
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 
-public class DataEntryActivity extends AppCompatActivity  {
+public class ClientInfoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_data_entry);
+        setContentView(R.layout.activity_client_info);
 
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
@@ -25,30 +22,28 @@ public class DataEntryActivity extends AppCompatActivity  {
         BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.bottom_navigation);
 
-        bottomNavigationView.setSelectedItemId(R.id.action_log_work);
+        bottomNavigationView.setSelectedItemId(R.id.action_clients);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 item -> {
                     switch (item.getItemId()) {
                         case R.id.action_log_work:
-                            // What to do??
-                            break;
+                            Intent logWorkIntent = new Intent(ClientInfoActivity.this, DataEntryActivity.class);
+                            startActivity(logWorkIntent);
                         case R.id.action_history:
-                            Intent historyIntent = new Intent(DataEntryActivity.this, HistoryActivity.class);
+                            Intent historyIntent = new Intent(ClientInfoActivity.this, HistoryActivity.class);
                             startActivity(historyIntent);
                         case R.id.action_dashboard:
-                            Intent logWorkIntent = new Intent(DataEntryActivity.this, MainActivity.class);
-                            startActivity(logWorkIntent);
-                        case R.id.action_clients:
-                            Intent clientIntent = new Intent(DataEntryActivity.this, ClientInfoActivity.class);
+                            Intent clientIntent = new Intent(ClientInfoActivity.this, MainActivity.class);
                             startActivity(clientIntent);
+                        case R.id.action_clients:
+                            break;
                         case R.id.action_calendar:
-                            Intent calendarIntent = new Intent(DataEntryActivity.this, CalendarActivity.class);
+                            Intent calendarIntent = new Intent(ClientInfoActivity.this, CalendarActivity.class);
                             startActivity(calendarIntent);
                     }
                     return true;
                 });
-
     }
 
     @Override
@@ -75,24 +70,5 @@ public class DataEntryActivity extends AppCompatActivity  {
                 return super.onOptionsItemSelected(item);
 
         }
-    }
-
-
-
-    public void cancelEntry(View view) {
-    }
-
-    public void saveEntry(View view) {
-    }
-
-
-    public void showTimePickerDialog(View v) {
-        DialogFragment newFragment = new TimePickerFragment();
-        newFragment.show(getSupportFragmentManager(), "timePicker");
-    }
-
-    public void showDatePickerDialog(View view) {
-        DialogFragment newFragment = new DatePickerFragment();
-        newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 }
