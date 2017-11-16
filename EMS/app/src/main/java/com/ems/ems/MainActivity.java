@@ -1,22 +1,16 @@
 package com.ems.ems;
 
-import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.BottomNavigationView.OnNavigationItemSelectedListener;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-
-    private CardView entryView,historyView,clientView,dashboardView;
+public class MainActivity extends AppCompatActivity {
 
 
 
@@ -27,9 +21,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
+        myToolbar.setTitle("EMS - Dashboard");
+
+        DashboardFragment dashboardFragment = new DashboardFragment();
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, dashboardFragment).commit();
+
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.bottom_navigation);
+
+
 
         bottomNavigationView.setSelectedItemId(R.id.action_dashboard);
 
@@ -54,25 +55,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                     return true;
                 });
-
-
-        init();
-    }
-
-
-
-
-    private void init() {
-        entryView = (CardView) findViewById(R.id.entryView);
-        historyView = (CardView) findViewById(R.id.historyView);
-        clientView = (CardView) findViewById(R.id.clientView);
-        dashboardView = (CardView) findViewById(R.id.dashboardView);
-
-
-        entryView.setOnClickListener(this);
-        historyView.setOnClickListener(this);
-        clientView.setOnClickListener(this);
-        dashboardView.setOnClickListener(this);
     }
 
     @Override
@@ -82,32 +64,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return true;
     }
 
-
-    @Override
-    public void onClick(View view) {
-        switch(view.getId()){
-            case R.id.entryView:
-                Intent intent = new Intent(MainActivity.this, DataEntryActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.historyView:
-                break;
-            case R.id.clientView:
-                break;
-            case R.id.dashboardView:
-                break;
-        }
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.account_info:
-                // Take to account info activity
+                Intent accountInfoIntent = new Intent(MainActivity.this, AccountInfoActivity.class);
+                startActivity(accountInfoIntent);
                 return true;
 
             case R.id.sign_out:
-                // sign out
+                Intent signOutIntent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(signOutIntent);
                 return true;
 
             default:

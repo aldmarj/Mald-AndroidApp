@@ -58,11 +58,13 @@ public class CalendarActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.account_info:
-                // Take to account info activity
+                Intent accountInfoIntent = new Intent(CalendarActivity.this, AccountInfoActivity.class);
+                startActivity(accountInfoIntent);
                 return true;
 
             case R.id.sign_out:
-                // sign out
+                Intent signOutIntent = new Intent(CalendarActivity.this, LoginActivity.class);
+                startActivity(signOutIntent);
                 return true;
 
             default:
