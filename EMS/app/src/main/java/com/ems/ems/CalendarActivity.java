@@ -37,8 +37,8 @@ public class CalendarActivity extends AppCompatActivity {
                             Intent calendarIntent = new Intent(CalendarActivity.this, MainActivity.class);
                             startActivity(calendarIntent);
                         case R.id.action_clients:
-                            Intent clientIntent = new Intent(CalendarActivity.this, ClientInfoActivity.class);
-                            startActivity(clientIntent);
+                            ClientInfoFragment clientInfoFragment = new ClientInfoFragment();
+                            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container_client, clientInfoFragment).commit();
                         case R.id.action_calendar:
                             // What to do??
                             break;

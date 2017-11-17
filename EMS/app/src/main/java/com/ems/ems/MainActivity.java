@@ -38,20 +38,18 @@ public class MainActivity extends AppCompatActivity {
                 item -> {
                     switch (item.getItemId()) {
                         case R.id.action_log_work:
-                            Intent logWorkIntent = new Intent(MainActivity.this, DataEntryActivity.class);
-                            startActivity(logWorkIntent);
+                            break;
                         case R.id.action_history:
-                            Intent historyIntent = new Intent(MainActivity.this, HistoryActivity.class);
-                            startActivity(historyIntent);
+                            HistoryFragment historyFragment = new HistoryFragment();
+                            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container_history, historyFragment).commit();
                         case R.id.action_dashboard:
-                            // What to do??
+                            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, dashboardFragment).commit();
                             break;
                         case R.id.action_clients:
-                            Intent clientIntent = new Intent(MainActivity.this, ClientInfoActivity.class);
-                            startActivity(clientIntent);
+                            ClientInfoFragment clientInfoFragment = new ClientInfoFragment();
+                            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container_client, clientInfoFragment).commit();
                         case R.id.action_calendar:
-                            Intent calendarIntent = new Intent(MainActivity.this, CalendarActivity.class);
-                            startActivity(calendarIntent);
+                            break;
                     }
                     return true;
                 });

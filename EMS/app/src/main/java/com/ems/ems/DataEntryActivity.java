@@ -40,8 +40,8 @@ public class DataEntryActivity extends AppCompatActivity  {
                             Intent logWorkIntent = new Intent(DataEntryActivity.this, MainActivity.class);
                             startActivity(logWorkIntent);
                         case R.id.action_clients:
-                            Intent clientIntent = new Intent(DataEntryActivity.this, ClientInfoActivity.class);
-                            startActivity(clientIntent);
+                            ClientInfoFragment clientInfoFragment = new ClientInfoFragment();
+                            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container_client, clientInfoFragment).commit();
                         case R.id.action_calendar:
                             Intent calendarIntent = new Intent(DataEntryActivity.this, CalendarActivity.class);
                             startActivity(calendarIntent);

@@ -29,6 +29,24 @@
             app:layout_constraintTop_toBottomOf="@id/my_toolbar"
             app:layout_constraintBottom_toTopOf="@id/bottom_navigation"/>
 
+    <FrameLayout
+        android:id="@+id/fragment_container_client"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/my_toolbar"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"/>
+
+    <FrameLayout
+        android:id="@+id/fragment_container_history"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/my_toolbar"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"/>
+
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_navigation"
