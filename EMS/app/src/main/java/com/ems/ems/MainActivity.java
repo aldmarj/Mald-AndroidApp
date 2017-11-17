@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(dashboardToolbar);
         dashboardToolbar.setTitle("EMS - Dashboard");
         DashboardFragment dashboardFragment = new DashboardFragment();
-        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, dashboardFragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, dashboardFragment).commit();
     }
 
     public void clientFragmentView() {
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         clientToolbar.setTitle("EMS - Clients");
 
         ClientInfoFragment clientInfoFragment = new ClientInfoFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_client, clientInfoFragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, clientInfoFragment).commit();
     }
 
     public void historyFragmentView() {
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(historyToolbar);
         historyToolbar.setTitle("EMS - History");
         HistoryFragment historyFragment = new HistoryFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_history, historyFragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, historyFragment).commit();
     }
 
     @Override

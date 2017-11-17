@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by aldma on 17/11/2017.
+ * Created by aldmar on 17/11/2017.
  */
 
 public class HistoryFragment extends Fragment {

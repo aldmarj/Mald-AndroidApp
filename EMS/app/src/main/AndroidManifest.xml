@@ -24,10 +24,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".DataEntryActivity" />
-        <activity android:name=".HistoryActivity" />
-        <activity android:name=".ClientInfoActivity" />
-        <activity android:name=".CalendarActivity" />
         <activity android:name=".AccountInfoActivity"></activity>
     </application>
 
