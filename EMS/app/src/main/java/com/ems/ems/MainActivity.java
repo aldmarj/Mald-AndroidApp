@@ -13,7 +13,6 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity {
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,13 +22,11 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(myToolbar);
         myToolbar.setTitle("EMS - Dashboard");
 
-        DashboardFragment dashboardFragment = new DashboardFragment();
-        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, dashboardFragment).commit();
+        dashboardFragmentView();
 
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.bottom_navigation);
-
 
 
         bottomNavigationView.setSelectedItemId(R.id.action_dashboard);
@@ -40,14 +37,14 @@ public class MainActivity extends AppCompatActivity {
                         case R.id.action_log_work:
                             break;
                         case R.id.action_history:
-                            HistoryFragment historyFragment = new HistoryFragment();
-                            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container_history, historyFragment).commit();
+                            historyFragmentView();
+                            break;
                         case R.id.action_dashboard:
-                            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, dashboardFragment).commit();
+                            dashboardFragmentView();
                             break;
                         case R.id.action_clients:
-                            ClientInfoFragment clientInfoFragment = new ClientInfoFragment();
-                            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container_client, clientInfoFragment).commit();
+                            clientFragmentView();
+                            break;
                         case R.id.action_calendar:
                             break;
                     }
@@ -55,10 +52,35 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
+    public void dashboardFragmentView() {
+        Toolbar dashboardToolbar = findViewById(R.id.my_toolbar);
+        setSupportActionBar(dashboardToolbar);
+        dashboardToolbar.setTitle("EMS - Dashboard");
+        DashboardFragment dashboardFragment = new DashboardFragment();
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, dashboardFragment).commit();
+    }
+
+    public void clientFragmentView() {
+        Toolbar clientToolbar = findViewById(R.id.my_toolbar);
+        setSupportActionBar(clientToolbar);
+        clientToolbar.setTitle("EMS - Clients");
+
+        ClientInfoFragment clientInfoFragment = new ClientInfoFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_client, clientInfoFragment).commit();
+    }
+
+    public void historyFragmentView() {
+        Toolbar historyToolbar = findViewById(R.id.my_toolbar);
+        setSupportActionBar(historyToolbar);
+        historyToolbar.setTitle("EMS - History");
+        HistoryFragment historyFragment = new HistoryFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_history, historyFragment).commit();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu,menu);
+        inflater.inflate(R.menu.main_menu, menu);
         return true;
     }
 
