@@ -18,9 +18,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar myToolbar = findViewById(R.id.my_toolbar);
-        setSupportActionBar(myToolbar);
-        myToolbar.setTitle("EMS - Dashboard");
 
         dashboardFragmentView();
 
@@ -35,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
                 item -> {
                     switch (item.getItemId()) {
                         case R.id.action_log_work:
+                            logWorkFragment();
                             break;
                         case R.id.action_history:
                             historyFragmentView();
@@ -46,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
                             clientFragmentView();
                             break;
                         case R.id.action_calendar:
+                            calendarFragment();
                             break;
                     }
                     return true;
@@ -56,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar dashboardToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(dashboardToolbar);
         dashboardToolbar.setTitle("EMS - Dashboard");
+
         DashboardFragment dashboardFragment = new DashboardFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, dashboardFragment).commit();
     }
@@ -73,8 +73,27 @@ public class MainActivity extends AppCompatActivity {
         Toolbar historyToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(historyToolbar);
         historyToolbar.setTitle("EMS - History");
+
         HistoryFragment historyFragment = new HistoryFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, historyFragment).commit();
+    }
+
+    public void logWorkFragment() {
+        Toolbar logWorkToolbar = findViewById(R.id.my_toolbar);
+        setSupportActionBar(logWorkToolbar);
+        logWorkToolbar.setTitle("EMS - Log Work");
+
+        LogWorkFragment logWorkFragment = new LogWorkFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, logWorkFragment).commit();
+    }
+
+    public void calendarFragment() {
+        Toolbar calendarToolbar = findViewById(R.id.my_toolbar);
+        setSupportActionBar(calendarToolbar);
+        calendarToolbar.setTitle("EMS - Calendar");
+
+        CalendarFragment calendarFragment = new CalendarFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, calendarFragment).commit();
     }
 
     @Override
