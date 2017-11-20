@@ -18,4 +18,7 @@ public class LogWorkFragment extends Fragment {
                 container, false);
         return view;
     }
+
+    public void showDatePickerDialog(View view) {
+    }
 }
