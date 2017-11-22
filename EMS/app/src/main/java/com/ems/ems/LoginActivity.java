@@ -21,6 +21,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -34,12 +35,21 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 import static android.Manifest.permission.READ_CONTACTS;
 
 /**
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+
+    /*
+    Private API Client
+     */
+    private APIClient apiClient = new APIClient();
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -92,8 +102,31 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
+        Button getApiButton = (Button) findViewById(R.id.get_api);
+        getApiButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getApi();
+            }
+        });
+
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+    }
+
+    private void getApi() {
+        apiClient.getApiService().getBusiness().enqueue(new Callback<List<Business>>() {
+            @Override
+            public void onResponse(Call<List<Business>> call, Response<List<Business>> response) {
+                Business business = response.body().get(0);
+                Log.d("aldma: ", String.format("businessName = %s, businessTag = %s, ", business.getName(), business.getTag()));
+            }
+
+            @Override
+            public void onFailure(Call<List<Business>> call, Throwable t) {
+                Log.d("aldma: ", t.getMessage());
+            }
+        });
     }
 
     private void populateAutoComplete() {
