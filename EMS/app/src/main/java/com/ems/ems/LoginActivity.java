@@ -3,6 +3,7 @@ package com.ems.ems;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.sax.StartElementListener;
@@ -31,6 +32,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +52,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     Private API Client
      */
     private APIClient apiClient = new APIClient();
+
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -94,11 +97,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
+
+
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptLogin();
+                //attemptLogin();
+                login();
             }
         });
 
@@ -119,12 +125,57 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             @Override
             public void onResponse(Call<List<Business>> call, Response<List<Business>> response) {
                 Business business = response.body().get(0);
-                Log.d("aldma: ", String.format("businessName = %s, businessTag = %s, ", business.getName(), business.getTag()));
+                Log.d("aldmar: ", String.format("businessName = %s, businessTag = %s, ", business.getName(), business.getTag()));
             }
 
             @Override
             public void onFailure(Call<List<Business>> call, Throwable t) {
-                Log.d("aldma: ", t.getMessage());
+                Log.d("aldmar: ", t.getMessage());
+            }
+        });
+    }
+
+    private void login(){
+
+        // Store values at the time of the login attempt.
+        String email = "test";
+        String password = "ptest";
+
+        apiClient.getApiService().checkCredentials(email, password).enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+
+
+
+                if (response.isSuccessful()) {
+                    Log.d("Successful Response: ", String.format("Success User Token = %s", response.body()));
+
+                    Context context = getApplicationContext();
+                    CharSequence text = response.body();
+                    int duration = Toast.LENGTH_LONG;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                } else if (response.code() == 401) {
+                    Log.d("401 response: ", String.format("Sorry Pal"));
+                } else {
+                    Context context = getApplicationContext();
+                    CharSequence text = "Incorrect password or username.";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.d("Login Check: ", t.getMessage());
             }
         });
     }
@@ -212,6 +263,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             cancel = true;
         }
 
+
         if (cancel) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
@@ -219,9 +271,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
+            // showProgress(true);
+            //mAuthTask = new UserLoginTask(email, password);
+            // mAuthTask.execute((Void) null);
+
         }
     }
 
