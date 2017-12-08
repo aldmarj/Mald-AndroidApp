@@ -16,6 +16,9 @@ public class Login {
     @SerializedName("account")
     private String account;
 
+    @SerializedName("token")
+    private String token;
+
     public String getToken() {
         return token;
     }
@@ -23,9 +26,6 @@ public class Login {
     public void setToken(String token) {
         this.token = token;
     }
-
-    @SerializedName("token")
-    private String token;
 
     public String getUsername() {
         return username;

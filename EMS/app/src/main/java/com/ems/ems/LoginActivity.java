@@ -6,6 +6,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.preference.PreferenceManager;
 import android.sax.StartElementListener;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -156,6 +157,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
+
+                    PreferenceManager.getDefaultSharedPreferences(context).edit().putString("TOKEN", response.body()).apply();
+
 
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);

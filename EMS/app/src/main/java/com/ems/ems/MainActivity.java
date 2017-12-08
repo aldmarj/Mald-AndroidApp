@@ -2,13 +2,16 @@ package com.ems.ems;
 
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,6 +25,9 @@ public class MainActivity extends AppCompatActivity {
         dashboardFragmentView();
 
 
+        String returnToken;
+        returnToken = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("TOKEN", "defaultStringIfNothingFound");
+
         BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.bottom_navigation);
 
@@ -33,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
                     switch (item.getItemId()) {
                         case R.id.action_log_work:
                             logWorkFragment();
+                            Toast toast = Toast.makeText(getApplicationContext(), returnToken,  Toast.LENGTH_LONG);
+                            toast.show();
                             break;
                         case R.id.action_history:
                             historyFragmentView();
@@ -112,6 +120,8 @@ public class MainActivity extends AppCompatActivity {
                 return true;
 
             case R.id.sign_out:
+                //SharedPreferences.Editor.remove("TOKEN", getApplicationContext().MODE_PRIVATE).commit();
+
                 Intent signOutIntent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(signOutIntent);
                 return true;
