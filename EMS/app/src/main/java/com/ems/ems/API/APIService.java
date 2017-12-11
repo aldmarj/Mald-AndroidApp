@@ -20,18 +20,16 @@ public interface APIService {
     Call<List<Business>> getBusiness();
 
 
-    @POST("/business/bae/login")
+    @POST("/business/cibusinesstag/login")
     @FormUrlEncoded
     Call<String> checkCredentials(@Field("u") String username,
                                   @Field("p") String password);
 
-    @GET("/business/bae/client")
-    Call<List<Client>> getClient (@QueryMap(encoded=true) Map<String, String> params);
+    @GET("/business/cibusinesstag/client")
+    Call<List<Client>> getClient(@QueryMap(encoded = true) Map<String, String> params);
 
-    //throws ApiException;
-    //value = , encoded=true
-    //Call<List<Client>> getClient(@Path("token") String token);
-    //(@Query("token") String token,
-    //@QueryMap Map<String, String>)
+    @GET("/business/cibusinesstag/worklog/range/0/1")
+    Call<List<WorkLog>> getWorkLog(@QueryMap(encoded = true) Map<String, String> params);
+
 
 }
