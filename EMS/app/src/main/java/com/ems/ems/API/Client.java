@@ -1,4 +1,4 @@
-package com.ems.ems;
+package com.ems.ems.API;
 
 import android.preference.PreferenceManager;
 

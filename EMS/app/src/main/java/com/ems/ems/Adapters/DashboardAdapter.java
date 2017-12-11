@@ -1,4 +1,5 @@
-package com.ems.ems;
+package com.ems.ems.Adapters;
+
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -6,20 +7,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.ems.ems.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
+public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.ViewHolder> {
 
-public class ClientInfoAdapter extends RecyclerView.Adapter<ClientInfoAdapter.ViewHolder>{
     private List<String> items = new ArrayList<>();
 
     @Override
-    public ClientInfoAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ClientInfoAdapter.ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_client_info_item, parent, false));
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_dashboard_item, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(ClientInfoAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         holder.bind(items.get(position));
     }
 
@@ -47,5 +50,4 @@ public class ClientInfoAdapter extends RecyclerView.Adapter<ClientInfoAdapter.Vi
             textView.setText(item);
         }
     }
-
 }

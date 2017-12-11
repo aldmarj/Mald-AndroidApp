@@ -1,5 +1,4 @@
-package com.ems.ems;
-
+package com.ems.ems.Fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,30 +9,33 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.ems.ems.Adapters.HistoryAdapter;
+import com.ems.ems.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by aldma on 15/11/2017.
+ * Created by aldmar on 17/11/2017.
  */
 
-public class DashboardFragment extends Fragment {
-    DashboardAdapter dashboardAdapter = new DashboardAdapter();
+public class HistoryFragment extends Fragment {
+    HistoryAdapter historyAdapter = new HistoryAdapter();
     List<String> items = new ArrayList<>();
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
-        recyclerView.setAdapter(dashboardAdapter);
+        View view = inflater.inflate(R.layout.fragment_history, container, false);
+        RecyclerView recyclerView = view.findViewById(R.id.recycler_view_history);
+        recyclerView.setAdapter(historyAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         for(int i = 0; i < 50; i++){
-            items.add("Dashboard " + i);
+            items.add("History " + i);
         }
 
-        dashboardAdapter.setItems(items);
+        historyAdapter.setItems(items);
         return view;
 
 

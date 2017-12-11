@@ -1,4 +1,4 @@
-package com.ems.ems;
+package com.ems.ems.Activities;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.preference.PreferenceManager;
-import android.sax.StartElementListener;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -34,6 +33,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.ems.ems.API.APIClient;
+import com.ems.ems.API.Business;
+import com.ems.ems.R;
 
 import java.util.ArrayList;
 import java.util.List;

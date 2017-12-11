@@ -1,6 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingTop="16dp"
     android:paddingLeft="16dp"
     android:paddingRight="16dp">
@@ -12,11 +13,26 @@
         android:layout_height="150dp">
 
         <TextView
-            android:id="@+id/text_view"
+            android:id="@+id/client_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
+            android:gravity="top"
             android:text="Client Info One" />
+
+        <TextView
+            android:id="@+id/client_location"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            android:text="Client Location" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_find_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_find_location"
+            />
 
     </android.support.v7.widget.CardView>
 

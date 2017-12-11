@@ -1,8 +1,6 @@
-package com.ems.ems;
+package com.ems.ems.Activities;
 
-import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.BottomNavigationView;
@@ -12,6 +10,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import com.ems.ems.Fragments.CalendarFragment;
+import com.ems.ems.Fragments.ClientInfoFragment;
+import com.ems.ems.Fragments.DashboardFragment;
+import com.ems.ems.Fragments.HistoryFragment;
+import com.ems.ems.Fragments.LogWorkFragment;
+import com.ems.ems.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,8 +44,6 @@ public class MainActivity extends AppCompatActivity {
                     switch (item.getItemId()) {
                         case R.id.action_log_work:
                             logWorkFragment();
-                            Toast toast = Toast.makeText(getApplicationContext(), returnToken,  Toast.LENGTH_LONG);
-                            toast.show();
                             break;
                         case R.id.action_history:
                             historyFragmentView();
