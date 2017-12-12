@@ -6,17 +6,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.ems.ems.API.WorkLog;
 import com.ems.ems.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by aldma on 17/11/2017.
+ * Created by aldmar on 17/11/2017.
  */
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder>{
-    private List<String> items = new ArrayList<>();
+
+    private List<WorkLog> items = new ArrayList<>();
 
     @Override
     public HistoryAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -33,7 +35,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         return items.size();
     }
 
-    public void setItems(List<String> items) {
+    public void setItems(List<WorkLog> items) {
         notifyItemRangeRemoved(0, this.items.size());
         this.items.clear();
         this.items.addAll(items);
@@ -48,8 +50,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
             textView = itemView.findViewById(R.id.text_view);
         }
 
-        void bind(String item){
-            textView.setText(item);
+        void bind(WorkLog item){
+            textView.setText(item.getWorkLogId());
         }
     }
 }

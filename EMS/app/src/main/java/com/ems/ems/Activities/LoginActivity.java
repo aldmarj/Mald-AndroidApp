@@ -142,8 +142,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private void login(){
 
         // Store values at the time of the login attempt.
-        String email = "test";
-        String password = "ptest";
+        String email = "ciusername";
+        String password = "cipassword";
 
         apiClient.getApiService().checkCredentials(email, password).enqueue(new Callback<String>() {
             @Override

@@ -65,6 +65,7 @@ public class ClientInfoFragment extends Fragment implements RecViewClickListener
             public void onResponse(Call<List<Client>> call, Response<List<Client>> response) {
                 List<Client> clients = response.body();
                 clientInfoAdapter.setItems(clients);
+
             }
 
             @Override
