@@ -59,8 +59,11 @@ public class ClientInfoFragment extends Fragment implements RecViewClickListener
     public void clientApiCall() {
 
         String token = PreferenceManager.getDefaultSharedPreferences(getActivity()).getString("TOKEN", "Sorry Chap!");
+        String businessTag = PreferenceManager.getDefaultSharedPreferences(getActivity()).getString("BUSINESS_TAG", "Sorry Chap!");
+
         params.put("t", token);
-        apiClient.getApiService().getClient(params).enqueue(new Callback<List<Client>>() {
+
+        apiClient.getApiService().getClient(businessTag, params).enqueue(new Callback<List<Client>>() {
             @Override
             public void onResponse(Call<List<Client>> call, Response<List<Client>> response) {
                 List<Client> clients = response.body();

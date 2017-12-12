@@ -8,6 +8,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.QueryMap;
 
 /**
@@ -20,16 +21,16 @@ public interface APIService {
     Call<List<Business>> getBusiness();
 
 
-    @POST("/business/cibusinesstag/login")
+    @POST("/business/{businessTag}/login")
     @FormUrlEncoded
-    Call<String> checkCredentials(@Field("u") String username,
+    Call<String> checkCredentials(@Path("businessTag") String businessTag, @Field("u") String username,
                                   @Field("p") String password);
 
-    @GET("/business/cibusinesstag/client")
-    Call<List<Client>> getClient(@QueryMap(encoded = true) Map<String, String> params);
+    @GET("/business/{businessTag}/client")
+    Call<List<Client>> getClient(@Path("businessTag") String businessTag, @QueryMap(encoded = true) Map<String, String> params);
 
-    @GET("/business/cibusinesstag/worklog/range/0/1")
-    Call<List<WorkLog>> getWorkLog(@QueryMap(encoded = true) Map<String, String> params);
+    @GET("/business/{businessTag}/worklog/range/0/1")
+    Call<List<WorkLog>> getWorkLog(@Path("businessTag") String businessTag, @QueryMap(encoded = true) Map<String, String> params);
 
 
 }

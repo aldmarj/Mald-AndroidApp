@@ -144,8 +144,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         // Store values at the time of the login attempt.
         String email = "ciusername";
         String password = "cipassword";
+        String businessTag = "cibusinesstag";
 
-        apiClient.getApiService().checkCredentials(email, password).enqueue(new Callback<String>() {
+        apiClient.getApiService().checkCredentials(businessTag, email, password).enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
 
@@ -161,8 +162,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
 
+                    PreferenceManager.getDefaultSharedPreferences(context).edit().putString("BUSINESS_TAG", businessTag).apply();
                     PreferenceManager.getDefaultSharedPreferences(context).edit().putString("TOKEN", response.body()).apply();
-
 
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);

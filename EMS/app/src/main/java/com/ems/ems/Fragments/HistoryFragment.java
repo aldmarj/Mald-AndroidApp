@@ -61,8 +61,11 @@ public class HistoryFragment extends Fragment {
     public void WorkLogApiCall() {
 
         String token = PreferenceManager.getDefaultSharedPreferences(getActivity()).getString("TOKEN", "Sorry Chap!");
+        String businessTag = PreferenceManager.getDefaultSharedPreferences(getActivity()).getString("BUSINESS_TAG", "Sorry Chap!");
+
         params.put("t", token);
-        apiClient.getApiService().getWorkLog(params).enqueue(new Callback<List<WorkLog>>() {
+
+        apiClient.getApiService().getWorkLog(businessTag, params).enqueue(new Callback<List<WorkLog>>() {
             @Override
             public void onResponse(Call<List<WorkLog>> call, Response<List<WorkLog>> response) {
                 List<WorkLog> workLog = response.body();
