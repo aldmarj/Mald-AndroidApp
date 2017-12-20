@@ -4,6 +4,8 @@ import android.preference.PreferenceManager;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+
 /**
  * Created by aldmar on 08/12/2017.
  */
@@ -18,6 +20,17 @@ public class Client {
 
     @SerializedName("clientId")
     private String clientID;
+
+    public ArrayList<Locations> getLocations() {
+        return locations;
+    }
+
+    public void setLocations(ArrayList<Locations> locations) {
+        this.locations = locations;
+    }
+
+    @SerializedName("locations")
+    private ArrayList<Locations> locations;
 
     public String getClientName() {
         return clientName;
@@ -44,3 +57,4 @@ public class Client {
     }
 
 }
+

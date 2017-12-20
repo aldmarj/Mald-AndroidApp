@@ -50,11 +50,6 @@ public class HistoryFragment extends Fragment {
 
         WorkLogApiCall();
 
-       /* for(int i = 0; i < 50; i++){
-            items.add("History " + i);
-        }
-
-        historyAdapter.setItems(items);*/
         return view;
     }
 
@@ -69,11 +64,35 @@ public class HistoryFragment extends Fragment {
             @Override
             public void onResponse(Call<List<WorkLog>> call, Response<List<WorkLog>> response) {
                 List<WorkLog> workLog = response.body();
+                getClientName();
                 historyAdapter.setItems(workLog);
             }
 
             @Override
             public void onFailure(Call<List<WorkLog>> call, Throwable t) {
+                Log.d("Client API error: ", t.getMessage());
+            }
+        });
+    }
+
+    public void getClientName(){
+        String token = PreferenceManager.getDefaultSharedPreferences(getActivity()).getString("TOKEN", "Sorry Chap!");
+        String businessTag = PreferenceManager.getDefaultSharedPreferences(getActivity()).getString("BUSINESS_TAG", "Sorry Chap!");
+
+        params.put("t", token);
+
+        apiClient.getApiService().getClient(businessTag, params).enqueue(new Callback<List<Client>>() {
+            @Override
+            public void onResponse(Call<List<Client>> call, Response<List<Client>> response) {
+                List<Client> clients = response.body();
+                for(Client client : clients)
+                {
+                    PreferenceManager.getDefaultSharedPreferences(getActivity()).edit().putString(client.getClientID(), client.getClientName()).apply();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Client>> call, Throwable t) {
                 Log.d("Client API error: ", t.getMessage());
             }
         });

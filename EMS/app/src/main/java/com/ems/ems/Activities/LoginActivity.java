@@ -83,9 +83,9 @@ public class LoginActivity extends AppCompatActivity  {
     private void login() {
 
         // Store values at the time of the login attempt.
-        String businessTag = mBusinessTagView.getText().toString(); //"cibusinesstag";
-        String username = mUsernameView.getText().toString(); //"ciusername";
-        String password = mPasswordView.getText().toString(); //"cipassword";
+        String businessTag = "cibusinesstag";//mBusinessTagView.getText().toString();
+        String username = "ciusername";//mUsernameView.getText().toString();
+        String password = "cipassword";//mPasswordView.getText().toString();
 
 
         apiClient.getApiService().checkCredentials(businessTag, username, password).enqueue(new Callback<String>() {
