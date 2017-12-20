@@ -19,6 +19,8 @@ import com.ems.ems.Adapters.ClientInfoAdapter;
 import com.ems.ems.R;
 import com.ems.ems.Adapters.ClickListeners.RecViewClickListener;
 
+import org.json.JSONArray;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,8 +69,11 @@ public class ClientInfoFragment extends Fragment implements RecViewClickListener
             @Override
             public void onResponse(Call<List<Client>> call, Response<List<Client>> response) {
                 List<Client> clients = response.body();
-                clientInfoAdapter.setItems(clients);
-
+                    clientInfoAdapter.setItems(clients);
+                for(Client client : clients)
+                {
+                    PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putString(client.getClientID(), client.getClientName()).apply();
+                }
             }
 
             @Override

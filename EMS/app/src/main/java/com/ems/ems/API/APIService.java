@@ -20,7 +20,6 @@ public interface APIService {
     @GET("/business")
     Call<List<Business>> getBusiness();
 
-
     @POST("/business/{businessTag}/login")
     @FormUrlEncoded
     Call<String> checkCredentials(@Path("businessTag") String businessTag, @Field("u") String username,
@@ -28,6 +27,11 @@ public interface APIService {
 
     @GET("/business/{businessTag}/client")
     Call<List<Client>> getClient(@Path("businessTag") String businessTag, @QueryMap(encoded = true) Map<String, String> params);
+
+    @GET("/business/{businessTag}/client/{clientId}")
+    Call<List<Client>> getClientById(@Path("businessTag") String businessTag,
+                                     @Path("clientId") String clientId,
+                                     @QueryMap(encoded = true) Map<String, String> params);
 
     @GET("/business/{businessTag}/worklog/range/0/1")
     Call<List<WorkLog>> getWorkLog(@Path("businessTag") String businessTag, @QueryMap(encoded = true) Map<String, String> params);

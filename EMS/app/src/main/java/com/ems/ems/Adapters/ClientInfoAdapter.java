@@ -47,12 +47,16 @@ public class ClientInfoAdapter extends RecyclerView.Adapter<ClientInfoAdapter.Vi
 
     class ViewHolder extends RecyclerView.ViewHolder {
         private TextView clientName;
+        private TextView clientBusinessTag;
+        private TextView clientDescription;
         private TextView clientLocation;
 
         ViewHolder(View itemView) {
             super(itemView);
             clientName = itemView.findViewById(R.id.client_name);
             clientLocation = itemView.findViewById(R.id.client_location);
+            clientBusinessTag = itemView.findViewById(R.id.client_business_tag);
+            clientDescription = itemView.findViewById(R.id.client_location_Description);
 
             FloatingActionButton myFab = itemView.findViewById(R.id.fab_find_location);
             myFab.setOnClickListener(v -> findClientLocation());
@@ -60,7 +64,13 @@ public class ClientInfoAdapter extends RecyclerView.Adapter<ClientInfoAdapter.Vi
 
         void bind(Client item){
             clientName.setText(item.getClientName());
-            clientLocation.setText("PL4 8AA");
+            clientBusinessTag.setText(item.getBusinessTag());
+
+            if (item.getLocations().size() != 0){
+                clientLocation.setText(item.getLocations().get(0).getPostcode());
+                clientDescription.setText(item.getLocations().get(0).getDescription());
+            }
+
         }
 
         public void findClientLocation(){
