@@ -3,14 +3,7 @@ package com.ems.ems.API;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by aldma on 11/12/2017.
- * "businessTag": "bae",
- "clientId": 1,
- "description": "a",
- "endTime": 1,
- "startTime": 0,
- "userName": "user",
- "workLogId": 1
+ * Created by aldmar on 11/12/2017.
  */
 
 public class WorkLog {
@@ -18,8 +11,8 @@ public class WorkLog {
     @SerializedName("businessTag")
     private String businessTag;
 
-    @SerializedName("clientName")
-    private String clientName;
+   // @SerializedName("clientName")
+    //private String clientName;
 
     @SerializedName("clientId")
     private String clientID;
@@ -36,8 +29,8 @@ public class WorkLog {
     @SerializedName("userName")
     private String username;
 
-    @SerializedName("workLogId")
-    private String workLogId;
+   // @SerializedName("workLogId")
+    //private String workLogId;
 
     public String getBusinessTag() {
         return businessTag;
@@ -47,13 +40,13 @@ public class WorkLog {
         this.businessTag = businessTag;
     }
 
-    public String getClientName() {
-        return clientName;
-    }
+    //public String getClientName() {
+     //   return clientName;
+    //}
 
-    public void setClientName(String clientName) {
-        this.clientName = clientName;
-    }
+    //public void setClientName(String clientName) {
+    //    this.clientName = clientName;
+    //}
 
     public String getClientID() {
         return clientID;
@@ -95,12 +88,12 @@ public class WorkLog {
         this.username = username;
     }
 
-    public String getWorkLogId() {
-        return workLogId;
-    }
+   // public String getWorkLogId() {
+       // return workLogId;
+    //}
 
-    public void setWorkLogId(String workLogId) {
-        this.workLogId = workLogId;
-    }
+    //public void setWorkLogId(String workLogId) {
+       // this.workLogId = workLogId;
+    //}
 
 }

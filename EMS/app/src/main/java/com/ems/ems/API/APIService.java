@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -35,6 +36,11 @@ public interface APIService {
 
     @GET("/business/{businessTag}/worklog/range/0/1")
     Call<List<WorkLog>> getWorkLog(@Path("businessTag") String businessTag, @QueryMap(encoded = true) Map<String, String> params);
+
+    @POST("/business/{businessTag}/worklog")
+    @FormUrlEncoded
+    Call<WorkLog> postWork(@Path("businessTag") String businessTag, @QueryMap(encoded = true) Map<String, String> params,
+                                  @Body WorkLog worklog);
 
 
 }
