@@ -64,8 +64,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
         void bind(WorkLog item){
 
-            if(PreferenceManager.getDefaultSharedPreferences(context).contains(item.getClientID())) {
-                clientName.setText(PreferenceManager.getDefaultSharedPreferences(context).getString(item.getClientID(), "Sorry Chap!"));
+            if(PreferenceManager.getDefaultSharedPreferences(context).contains(item.getClientId())) {
+                clientName.setText(PreferenceManager.getDefaultSharedPreferences(context).getString(item.getClientId(), "Sorry Chap!"));
             }
             workDescription.setText(item.getDescription());
             workStartTime.setText(item.getStartTime());

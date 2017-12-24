@@ -4,18 +4,22 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.ems.ems.Fragments.CalendarFragment;
 import com.ems.ems.Fragments.ClientInfoFragment;
 import com.ems.ems.Fragments.DashboardFragment;
+import com.ems.ems.Fragments.DatePickerFragment;
 import com.ems.ems.Fragments.HistoryFragment;
 import com.ems.ems.Fragments.LogWorkFragment;
+import com.ems.ems.Fragments.TimePickerFragment;
 import com.ems.ems.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -64,7 +68,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void dashboardFragmentView() {
         Toolbar dashboardToolbar = findViewById(R.id.my_toolbar);
-        setSupportActionBar(dashboardToolbar);
+        dashboardToolbar.inflateMenu(R.menu.main_menu);
+       // setSupportActionBar(dashboardToolbar);
         dashboardToolbar.setTitle("EMS - Dashboard");
 
         DashboardFragment dashboardFragment = new DashboardFragment();
@@ -135,6 +140,16 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
 
         }
+    }
+
+    public void showTimePickerDialog(View view) {
+        DialogFragment newFragment = new TimePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "timePicker");
+    }
+
+    public void showDatePickerDialog(View view) {
+        DialogFragment newFragment = new DatePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 }
 

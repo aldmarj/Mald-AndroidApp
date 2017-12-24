@@ -1,74 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.ems.ems.Fragments.LogWorkFragment">
+    android:layout_height="wrap_content"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    android:paddingBottom="24dp">
 
-    <EditText
-        android:id="@+id/edit_title"
-        android:layout_width="fill_parent"
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="0dp"
-        android:layout_marginTop="0dp"
-        android:hint="Title"
-        app:layout_constraintStart_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/edit_client"
-        app:layout_constraintVertical_bias="1"/>
+        app:hintTextAppearance="@style/MyHintText"
+        app:errorTextAppearance="@style/MyErrorText"
+        app:errorEnabled="true">
 
-    <EditText
-        android:id="@+id/edit_client"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="0dp"
-        android:layout_marginTop="0dp"
-        android:hint="Client Info"
-        app:layout_constraintTop_toBottomOf="@id/edit_title"
-        app:layout_constraintBottom_toTopOf="@id/edit_description"
-        app:layout_constraintStart_toEndOf="parent"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/edit_description"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:hint="Description"
-        android:inputType="textMultiLine"
-        android:lines="5"
-        app:layout_constraintTop_toBottomOf="@+id/edit_client"
-        app:layout_constraintStart_toEndOf="parent"/>
+            <EditText
+                android:id="@+id/log_client_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:hint="Client Name"
+                android:theme="@style/MyEditText" />
 
-    <Spinner
-        android:id="@+id/spinner_hours"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:entries="@array/time_spent_list"
-        android:prompt="@string/text_time_spent"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/edit_description"
-        app:layout_constraintStart_toStartOf="parent"/>
-
-    <Button
-        android:id="@+id/button_date_picker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="showDatePickerDialog"
-        android:text="pick date"
-        android:layout_marginRight="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/edit_description"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <android.support.design.widget.FloatingActionButton
-        app:fabSize="normal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_action_add_data"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintTop_toBottomOf="@+id/button_date_picker"
-        app:layout_constraintEnd_toEndOf="parent"/>
+            <EditText
+                android:id="@+id/log_work_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/log_client_name"
+                android:hint="Description"
+                android:inputType="textMultiLine"
+                android:minLines="5"
+                android:theme="@style/MyEditText" />
 
 
+            <EditText
+                android:id="@+id/log_postcode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignEnd="@+id/log_start_time"
+                android:layout_below="@+id/log_work_description"
+                android:hint="Postcode"
+                android:theme="@style/MyEditText" />
 
-</android.support.constraint.ConstraintLayout>
+            <Button
+                android:id="@+id/log_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignStart="@+id/log_end_time"
+                android:layout_below="@+id/log_work_description"
+                android:text="Date"
+                android:onClick="showDatePickerDialog"
+                android:theme="@style/MyButton"/>
+
+            <Button
+                android:id="@+id/log_start_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/log_postcode"
+                android:onClick="showTimePickerDialog"
+                android:text="Start Time"
+                android:theme="@style/MyButton"/>
+
+            <Button
+                android:id="@+id/log_end_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/log_postcode"
+                android:onClick="showTimePickerDialog"
+                android:text="End Time"
+                android:theme="@style/MyButton"/>
+
+
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/add_work_entry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:paddingBottom="30dp"
+                android:src="@drawable/ic_add"
+                android:theme="@style/MyFloatingButton" />
+
+        </RelativeLayout>
+
+
+    </android.support.design.widget.TextInputLayout>
+
+
+</LinearLayout>

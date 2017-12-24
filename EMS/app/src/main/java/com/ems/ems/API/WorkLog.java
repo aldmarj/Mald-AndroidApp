@@ -3,14 +3,7 @@ package com.ems.ems.API;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by aldma on 11/12/2017.
- * "businessTag": "bae",
- "clientId": 1,
- "description": "a",
- "endTime": 1,
- "startTime": 0,
- "userName": "user",
- "workLogId": 1
+ * Created by aldmar on 11/12/2017.
  */
 
 public class WorkLog {
@@ -18,11 +11,11 @@ public class WorkLog {
     @SerializedName("businessTag")
     private String businessTag;
 
-    @SerializedName("clientName")
-    private String clientName;
+    // @SerializedName("clientName")
+    //private String clientName;
 
     @SerializedName("clientId")
-    private String clientID;
+    private String clientId;
 
     @SerializedName("description")
     private String description;
@@ -34,10 +27,18 @@ public class WorkLog {
     private String startTime;
 
     @SerializedName("userName")
-    private String username;
+    private String userName;
 
-    @SerializedName("workLogId")
-    private String workLogId;
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    // @SerializedName("workLogId")
+    //private String workLogId;
 
     public String getBusinessTag() {
         return businessTag;
@@ -47,20 +48,20 @@ public class WorkLog {
         this.businessTag = businessTag;
     }
 
-    public String getClientName() {
-        return clientName;
+    //public String getClientName() {
+    //   return clientName;
+    //}
+
+    //public void setClientName(String clientName) {
+    //    this.clientName = clientName;
+    //}
+
+    public String getClientId() {
+        return clientId;
     }
 
-    public void setClientName(String clientName) {
-        this.clientName = clientName;
-    }
-
-    public String getClientID() {
-        return clientID;
-    }
-
-    public void setClientID(String clientID) {
-        this.clientID = clientID;
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
     }
 
     public String getDescription() {
@@ -87,20 +88,13 @@ public class WorkLog {
         this.startTime = startTime;
     }
 
-    public String getUsername() {
-        return username;
-    }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+    // public String getWorkLogId() {
+    // return workLogId;
+    //}
 
-    public String getWorkLogId() {
-        return workLogId;
-    }
-
-    public void setWorkLogId(String workLogId) {
-        this.workLogId = workLogId;
-    }
+    //public void setWorkLogId(String workLogId) {
+    // this.workLogId = workLogId;
+    //}
 
 }
