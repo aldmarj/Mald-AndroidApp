@@ -64,7 +64,9 @@
 
     <style name="MyToolbar">
         <item name="theme">@style/ThemeOverlay.AppCompat.Dark</item>
-        <item name="android:background">@color/pink</item>
+        <item name="android:background">@color/red</item>
         <item name="android:elevation">4dp</item>
     </style>
+
+
 </resources>

@@ -1,5 +1,7 @@
 package com.ems.ems.API;
 
+import com.ems.ems.API.GooglePojo.GeoLocation;
+
 import java.util.List;
 import java.util.Map;
 
@@ -42,6 +44,10 @@ public interface APIService {
     @POST("/business/{businessTag}/worklog")
     Call<String> postWork(@Path("businessTag") String businessTag, @QueryMap(encoded = true) Map<String, String> params,
                           @Body String worklog);
+
+    @Headers("Content-Type:application/json; charset=UTF-8")
+    @GET("maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyBok17yEyr1SeNcldrxJrEbkHyDpImRhgg")
+    Call<GeoLocation> getLatLong();
 
 
 }

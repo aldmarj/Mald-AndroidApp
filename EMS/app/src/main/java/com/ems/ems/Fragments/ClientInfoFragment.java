@@ -13,13 +13,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ems.ems.API.APIClient;
+import com.ems.ems.API.GooglePojo.GeoLocation;
+import com.ems.ems.API.GoogleAPIClient;
 import com.ems.ems.Activities.MapsActivity;
 import com.ems.ems.API.Client;
 import com.ems.ems.Adapters.ClientInfoAdapter;
 import com.ems.ems.R;
 import com.ems.ems.Adapters.ClickListeners.RecViewClickListener;
-
-import org.json.JSONArray;
 
 import java.util.HashMap;
 import java.util.List;
@@ -38,7 +38,13 @@ public class ClientInfoFragment extends Fragment implements RecViewClickListener
     Private API Client
      */
     private APIClient apiClient = new APIClient();
+    private GoogleAPIClient googleApiClient = new GoogleAPIClient();
     private Map<String, String> params = new HashMap<>();
+
+    String latLng;
+    String lat;
+    String lng;
+
 
 
     @Nullable
@@ -86,8 +92,30 @@ public class ClientInfoFragment extends Fragment implements RecViewClickListener
     @Override
     public void onClick(int position, String clientLocation) {
 
+        googleLatLong(clientLocation);
+
         Intent mapsIntent = new Intent(getActivity(), MapsActivity.class);
         startActivity(mapsIntent);
 
+    }
+
+    private void googleLatLong(String clientLocation) {
+
+
+        googleApiClient.getApiService().getLatLong().enqueue(new Callback<GeoLocation>() {
+            @Override
+            public void onResponse(Call<GeoLocation> call, Response<GeoLocation> response) {
+                Log.d("Google API Success: ", "We're In");
+                GeoLocation geoLocation = response.body();
+                lat = String.valueOf(geoLocation.getResults().get(0).getGeometry().getLocation().getLat());
+                lng = String.valueOf(geoLocation.getResults().get(0).getGeometry().getLocation().getLng());;
+                latLng = lat + lng;
+            }
+
+            @Override
+            public void onFailure(Call<GeoLocation> call, Throwable t) {
+                Log.d("Google API error: ", t.getMessage());
+            }
+        });
     }
 }

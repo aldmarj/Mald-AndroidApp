@@ -21,6 +21,9 @@ public class Client {
     @SerializedName("clientId")
     private String clientID;
 
+    @SerializedName("locations")
+    private ArrayList<Locations> locations;
+
     public ArrayList<Locations> getLocations() {
         return locations;
     }
@@ -28,9 +31,6 @@ public class Client {
     public void setLocations(ArrayList<Locations> locations) {
         this.locations = locations;
     }
-
-    @SerializedName("locations")
-    private ArrayList<Locations> locations;
 
     public String getClientName() {
         return clientName;

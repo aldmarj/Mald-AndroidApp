@@ -68,8 +68,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void dashboardFragmentView() {
         Toolbar dashboardToolbar = findViewById(R.id.my_toolbar);
-        dashboardToolbar.inflateMenu(R.menu.main_menu);
-       // setSupportActionBar(dashboardToolbar);
+        //dashboardToolbar.inflateMenu(R.menu.main_menu);
+        setSupportActionBar(dashboardToolbar);
         dashboardToolbar.setTitle("EMS - Dashboard");
 
         DashboardFragment dashboardFragment = new DashboardFragment();
