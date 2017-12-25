@@ -1,5 +1,6 @@
 package com.ems.ems.Activities;
 
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
@@ -39,8 +40,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        double lat = Double.parseDouble(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("Lat", "Sorry Chap!"));
+        double lng = Double.parseDouble(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("Long", "Sorry Chap!"));
+
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
+        LatLng sydney = new LatLng(lat, lng);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }

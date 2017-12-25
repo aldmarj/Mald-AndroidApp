@@ -13,6 +13,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
 /**
@@ -46,8 +47,8 @@ public interface APIService {
                           @Body String worklog);
 
     @Headers("Content-Type:application/json; charset=UTF-8")
-    @GET("maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyBok17yEyr1SeNcldrxJrEbkHyDpImRhgg")
-    Call<GeoLocation> getLatLong();
+    @GET("maps/api/geocode/json")
+    Call<GeoLocation> getLatLong(@Query("address") String postcode);
 
 
 }

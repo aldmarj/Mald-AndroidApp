@@ -41,9 +41,8 @@ public class ClientInfoFragment extends Fragment implements RecViewClickListener
     private GoogleAPIClient googleApiClient = new GoogleAPIClient();
     private Map<String, String> params = new HashMap<>();
 
-    String latLng;
-    String lat;
-    String lng;
+    double lat;
+    double lng;
 
 
 
@@ -101,15 +100,21 @@ public class ClientInfoFragment extends Fragment implements RecViewClickListener
 
     private void googleLatLong(String clientLocation) {
 
-
-        googleApiClient.getApiService().getLatLong().enqueue(new Callback<GeoLocation>() {
+        String postcode = clientLocation + "&key=AIzaSyBok17yEyr1SeNcldrxJrEbkHyDpImRhgg";
+        googleApiClient.getApiService().getLatLong(postcode).enqueue(new Callback<GeoLocation>() {
             @Override
             public void onResponse(Call<GeoLocation> call, Response<GeoLocation> response) {
+
+
                 Log.d("Google API Success: ", "We're In");
                 GeoLocation geoLocation = response.body();
-                lat = String.valueOf(geoLocation.getResults().get(0).getGeometry().getLocation().getLat());
-                lng = String.valueOf(geoLocation.getResults().get(0).getGeometry().getLocation().getLng());;
-                latLng = lat + lng;
+                if(geoLocation.getResults().size() != 0){
+                    lat = geoLocation.getResults().get(0).getGeometry().getLocation().getLat();
+                    lng = geoLocation.getResults().get(0).getGeometry().getLocation().getLng();
+
+                    PreferenceManager.getDefaultSharedPreferences(getActivity()).edit().putString("Lat", String.valueOf(lat)).apply();
+                    PreferenceManager.getDefaultSharedPreferences(getActivity()).edit().putString("Long", String.valueOf(lng)).apply();
+                }
             }
 
             @Override
