@@ -13,18 +13,13 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.ems.ems.API.APIClient;
-import com.ems.ems.API.Client;
-import com.ems.ems.API.WorkLog;
+import com.ems.ems.API.WorkLogPojo.WorkLog;
 import com.ems.ems.R;
 import com.google.gson.Gson;
 
-import org.json.JSONObject;
-
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

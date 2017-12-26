@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.ems.ems.API.Client;
+import com.ems.ems.API.ClientPojo.Client;
 import com.ems.ems.Adapters.ClickListeners.RecViewClickListener;
 import com.ems.ems.R;
 
@@ -66,7 +66,7 @@ public class ClientInfoAdapter extends RecyclerView.Adapter<ClientInfoAdapter.Vi
             clientBusinessTag.setText(item.getBusinessTag());
 
             if (item.getLocations().size() != 0){
-                clientLocation.setText(item.getLocations().get(0).getPostcode());
+                clientLocation.setText(item.getLocations().get(0).getPostCode());
                 clientDescription.setText(item.getLocations().get(0).getDescription());
             }
 

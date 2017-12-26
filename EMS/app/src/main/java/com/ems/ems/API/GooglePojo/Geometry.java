@@ -1,13 +1,7 @@
 package com.ems.ems.API.GooglePojo;
 
-import android.location.Location;
-
-import com.ems.ems.API.Locations;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by aldma on 25/12/2017.

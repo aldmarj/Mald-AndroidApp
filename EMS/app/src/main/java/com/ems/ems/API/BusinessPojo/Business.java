@@ -1,4 +1,4 @@
-package com.ems.ems.API;
+package com.ems.ems.API.BusinessPojo;
 
 import com.google.gson.annotations.SerializedName;
 

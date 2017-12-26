@@ -14,7 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.ems.ems.API.APIClient;
-import com.ems.ems.API.Business;
+import com.ems.ems.API.BusinessPojo.Business;
 import com.ems.ems.R;
 
 

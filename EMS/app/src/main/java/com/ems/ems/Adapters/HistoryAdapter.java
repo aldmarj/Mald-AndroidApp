@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.ems.ems.API.WorkLog;
+import com.ems.ems.API.WorkLogPojo.WorkLog;
 import com.ems.ems.R;
 
 import java.util.ArrayList;

@@ -12,8 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ems.ems.API.APIClient;
-import com.ems.ems.API.Client;
-import com.ems.ems.API.WorkLog;
+import com.ems.ems.API.ClientPojo.Client;
+import com.ems.ems.API.WorkLogPojo.WorkLog;
 import com.ems.ems.Adapters.HistoryAdapter;
 import com.ems.ems.R;
 
@@ -87,7 +87,7 @@ public class HistoryFragment extends Fragment {
                 List<Client> clients = response.body();
                 for(Client client : clients)
                 {
-                    PreferenceManager.getDefaultSharedPreferences(getActivity()).edit().putString(client.getClientID(), client.getClientName()).apply();
+                    PreferenceManager.getDefaultSharedPreferences(getActivity()).edit().putString(String.valueOf(client.getClientId()), client.getClientName()).apply();
                 }
             }
 

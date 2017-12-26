@@ -17,7 +17,7 @@ import com.ems.ems.API.APIClient;
 import com.ems.ems.API.GooglePojo.GeoLocation;
 import com.ems.ems.API.GoogleAPIClient;
 import com.ems.ems.Activities.MapsActivity;
-import com.ems.ems.API.Client;
+import com.ems.ems.API.ClientPojo.Client;
 import com.ems.ems.Adapters.ClientInfoAdapter;
 import com.ems.ems.R;
 import com.ems.ems.Adapters.ClickListeners.RecViewClickListener;
@@ -86,7 +86,7 @@ public class ClientInfoFragment extends Fragment implements RecViewClickListener
                     clientInfoAdapter.setItems(clients);
                 for(Client client : clients)
                 {
-                    PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putString(client.getClientID(), client.getClientName()).apply();
+                    PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putString(String.valueOf(client.getClientId()), client.getClientName()).apply();
                 }
             }
 
