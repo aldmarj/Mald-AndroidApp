@@ -58,8 +58,7 @@ public class ClientInfoAdapter extends RecyclerView.Adapter<ClientInfoAdapter.Vi
             clientBusinessTag = itemView.findViewById(R.id.client_business_tag);
             clientDescription = itemView.findViewById(R.id.client_location_Description);
 
-            FloatingActionButton myFab = itemView.findViewById(R.id.fab_find_location);
-            myFab.setOnClickListener(v -> findClientLocation());
+
         }
 
         void bind(Client item){
@@ -70,6 +69,9 @@ public class ClientInfoAdapter extends RecyclerView.Adapter<ClientInfoAdapter.Vi
                 clientLocation.setText(item.getLocations().get(0).getPostcode());
                 clientDescription.setText(item.getLocations().get(0).getDescription());
             }
+
+            FloatingActionButton myFab = itemView.findViewById(R.id.fab_find_location);
+            myFab.setOnClickListener(v -> findClientLocation());
 
         }
 

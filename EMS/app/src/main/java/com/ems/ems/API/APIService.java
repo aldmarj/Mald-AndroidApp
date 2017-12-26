@@ -47,6 +47,11 @@ public interface APIService {
                           @Body String worklog);
 
     @Headers("Content-Type:application/json; charset=UTF-8")
+    @POST("/business/{businessTag}/client")
+    Call<String> postClient(@Path("businessTag") String businessTag, @QueryMap(encoded = true) Map<String, String> params,
+                          @Body String newClient);
+
+    @Headers("Content-Type:application/json; charset=UTF-8")
     @GET("maps/api/geocode/json")
     Call<GeoLocation> getLatLong(@Query("address") String postcode);
 

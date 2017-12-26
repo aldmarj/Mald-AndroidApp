@@ -2,6 +2,7 @@ package com.ems.ems.Fragments;
 
 import android.content.Intent;
 import android.preference.PreferenceManager;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -58,9 +59,17 @@ public class ClientInfoFragment extends Fragment implements RecViewClickListener
 
         clientApiCall();
 
+        FloatingActionButton myFab = view.findViewById(R.id.add_client_fab);
+        myFab.setOnClickListener(v -> addClient());
+
 
         return view;
 
+    }
+
+    private void addClient() {
+        AddClientFragment addClientFragment = new AddClientFragment();
+        getFragmentManager().beginTransaction().replace(R.id.fragment_container, addClientFragment).commit();
     }
 
     public void clientApiCall() {
@@ -114,6 +123,10 @@ public class ClientInfoFragment extends Fragment implements RecViewClickListener
 
                     PreferenceManager.getDefaultSharedPreferences(getActivity()).edit().putString("Lat", String.valueOf(lat)).apply();
                     PreferenceManager.getDefaultSharedPreferences(getActivity()).edit().putString("Long", String.valueOf(lng)).apply();
+                    Log.d("Google API Location: ", clientLocation);
+                    Log.d("Google API Lat: ", PreferenceManager.getDefaultSharedPreferences(getActivity()).getString("Lat", "Sorry Chap!"));
+                    Log.d("Google API Long: ", PreferenceManager.getDefaultSharedPreferences(getActivity()).getString("Long", "Sorry Chap!"));
+
                 }
             }
 
