@@ -3,6 +3,7 @@ package com.ems.ems.API;
 import com.ems.ems.API.BusinessPojo.Business;
 import com.ems.ems.API.ClientPojo.Client;
 import com.ems.ems.API.GooglePojo.GeoLocation;
+import com.ems.ems.API.WeatherPojo.WeatherCard;
 import com.ems.ems.API.WorkLogPojo.WorkLog;
 
 import java.util.List;
@@ -57,6 +58,10 @@ public interface APIService {
     @Headers("Content-Type:application/json; charset=UTF-8")
     @GET("maps/api/geocode/json")
     Call<GeoLocation> getLatLong(@Query("address") String postcode);
+
+    @Headers("Content-Type:application/json; charset=UTF-8")
+    @GET("data/2.5/forecast?lat=35&lon=139")
+    Call<WeatherCard> getWeather();
 
 
 }
