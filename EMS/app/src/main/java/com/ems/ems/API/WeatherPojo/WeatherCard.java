@@ -3,64 +3,133 @@ package com.ems.ems.API.WeatherPojo;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 /**
- * Created by aldma on 26/12/2017.
+ * Created by aldmar on 26/12/2017.
  */
 
 public class WeatherCard {
+    @SerializedName("coord")
+    @Expose
+    private Coord coord;
+    @SerializedName("sys")
+    @Expose
+    private Sys sys;
+    @SerializedName("weather")
+    @Expose
+    private List<Weather> weather = null;
+    @SerializedName("main")
+    @Expose
+    private Main main;
+    @SerializedName("wind")
+    @Expose
+    private Wind wind;
+    @SerializedName("rain")
+    @Expose
+    private Rain rain;
+    @SerializedName("clouds")
+    @Expose
+    private Clouds clouds;
+    @SerializedName("dt")
+    @Expose
+    private Integer dt;
+    @SerializedName("id")
+    @Expose
+    private Integer id;
+    @SerializedName("name")
+    @Expose
+    private String name;
     @SerializedName("cod")
     @Expose
-    private String cod;
-    @SerializedName("message")
-    @Expose
-    private Double message;
-    @SerializedName("cnt")
-    @Expose
-    private Integer cnt;
-    @SerializedName("list")
-    @Expose
-    private java.util.List<List> list = null;
-    @SerializedName("city")
-    @Expose
-    private City city;
+    private Integer cod;
 
-    public String getCod() {
+    public Coord getCoord() {
+        return coord;
+    }
+
+    public void setCoord(Coord coord) {
+        this.coord = coord;
+    }
+
+    public Sys getSys() {
+        return sys;
+    }
+
+    public void setSys(Sys sys) {
+        this.sys = sys;
+    }
+
+    public List<Weather> getWeather() {
+        return weather;
+    }
+
+    public void setWeather(List<Weather> weather) {
+        this.weather = weather;
+    }
+
+    public Main getMain() {
+        return main;
+    }
+
+    public void setMain(Main main) {
+        this.main = main;
+    }
+
+    public Wind getWind() {
+        return wind;
+    }
+
+    public void setWind(Wind wind) {
+        this.wind = wind;
+    }
+
+    public Rain getRain() {
+        return rain;
+    }
+
+    public void setRain(Rain rain) {
+        this.rain = rain;
+    }
+
+    public Clouds getClouds() {
+        return clouds;
+    }
+
+    public void setClouds(Clouds clouds) {
+        this.clouds = clouds;
+    }
+
+    public Integer getDt() {
+        return dt;
+    }
+
+    public void setDt(Integer dt) {
+        this.dt = dt;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getCod() {
         return cod;
     }
 
-    public void setCod(String cod) {
+    public void setCod(Integer cod) {
         this.cod = cod;
     }
 
-    public Double getMessage() {
-        return message;
-    }
-
-    public void setMessage(Double message) {
-        this.message = message;
-    }
-
-    public Integer getCnt() {
-        return cnt;
-    }
-
-    public void setCnt(Integer cnt) {
-        this.cnt = cnt;
-    }
-
-    public java.util.List<List> getList() {
-        return list;
-    }
-
-    public void setList(java.util.List<List> list) {
-        this.list = list;
-    }
-
-    public City getCity() {
-        return city;
-    }
-
-    public void setCity(City city) {
-        this.city = city;
-    }
 }

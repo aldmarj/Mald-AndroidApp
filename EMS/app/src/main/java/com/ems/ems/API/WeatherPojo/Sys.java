@@ -8,15 +8,38 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class Sys {
-    @SerializedName("pod")
+    @SerializedName("country")
     @Expose
-    private String pod;
+    private String country;
+    @SerializedName("sunrise")
+    @Expose
+    private Integer sunrise;
+    @SerializedName("sunset")
+    @Expose
+    private Integer sunset;
 
-    public String getPod() {
-        return pod;
+    public String getCountry() {
+        return country;
     }
 
-    public void setPod(String pod) {
-        this.pod = pod;
+    public void setCountry(String country) {
+        this.country = country;
     }
+
+    public Integer getSunrise() {
+        return sunrise;
+    }
+
+    public void setSunrise(Integer sunrise) {
+        this.sunrise = sunrise;
+    }
+
+    public Integer getSunset() {
+        return sunset;
+    }
+
+    public void setSunset(Integer sunset) {
+        this.sunset = sunset;
+    }
+
 }
