@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 /**
- * Created by aldma on 26/12/2017.
+ * Created by aldmar on 26/12/2017.
  */
 
 public class WeatherAPIClient {
@@ -22,7 +22,7 @@ public class WeatherAPIClient {
                 .client(httpClient)
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl("api.openweathermap.org/")
+                .baseUrl("https://api.openweathermap.org/")
                 .build()
                 .create(APIService.class);
 

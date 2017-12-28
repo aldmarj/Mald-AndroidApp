@@ -4,30 +4,31 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by aldma on 26/12/2017.
+ * Created by aldmar on 26/12/2017.
  */
 
 public class Coord {
-    @SerializedName("lat")
-    @Expose
-    private Double lat;
     @SerializedName("lon")
     @Expose
-    private Double lon;
+    private double lon;
+    @SerializedName("lat")
+    @Expose
+    private double lat;
 
-    public Double getLat() {
-        return lat;
-    }
-
-    public void setLat(Double lat) {
-        this.lat = lat;
-    }
-
-    public Double getLon() {
+    public double getLon() {
         return lon;
     }
 
-    public void setLon(Double lon) {
+    public void setLon(double lon) {
         this.lon = lon;
     }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
 }

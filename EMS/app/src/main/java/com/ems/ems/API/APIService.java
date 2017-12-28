@@ -60,7 +60,7 @@ public interface APIService {
     Call<GeoLocation> getLatLong(@Query("address") String postcode);
 
     @Headers("Content-Type:application/json; charset=UTF-8")
-    @GET("data/2.5/forecast?lat=35&lon=139")
+    @GET("data/2.5/weather?lat=50.376289&lon=-4.143841&units=metric&APPID=ea11946759095eabe7638933c7a344b6")
     Call<WeatherCard> getWeather();
 
 

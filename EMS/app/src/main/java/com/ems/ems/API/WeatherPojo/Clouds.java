@@ -20,4 +20,5 @@ public class Clouds {
     public void setAll(Integer all) {
         this.all = all;
     }
+
 }
