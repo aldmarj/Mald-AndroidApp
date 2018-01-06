@@ -54,11 +54,11 @@ public class AddClientFragment extends Fragment {
         List<Locations> clientLocation = new ArrayList<>();
         Locations location = new Locations();
 
-        client.setClientName("Sally Cooper");
+        client.setClientName("Pddy Rafferty");
         client.setBusinessTag("cibusinesstag");
 
-        location.setDescription("Office Stationary Supplier");
-        location.setPostCode("PL4 8HY");
+        location.setDescription("Morbi mollis finibus ullamcorper.");
+        location.setPostCode("NN7 2BT");
 
         clientLocation.add(location);
 

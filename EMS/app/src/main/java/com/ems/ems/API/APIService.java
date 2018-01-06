@@ -62,11 +62,11 @@ public interface APIService {
 
     @Headers("Content-Type:application/json; charset=UTF-8")
     @GET("maps/api/geocode/json")
-    Call<GeoLocation> getLatLong(@Query("address") String postcode);
+    Call<GeoLocation> getLatLong(@QueryMap Map<String, String> geoParams);
 
     @Headers("Content-Type:application/json; charset=UTF-8")
-    @GET("data/2.5/weather?lat=50.376289&lon=-4.143841&units=metric&APPID=ea11946759095eabe7638933c7a344b6")
-    Call<WeatherCard> getWeather();
+    @GET("data/2.5/weather")
+    Call<WeatherCard> getWeather(@QueryMap Map<String, String> weatherParams);
 
 
 }
