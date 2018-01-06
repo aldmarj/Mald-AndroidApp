@@ -10,6 +10,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.ems.ems.API.APIClient;
 import com.ems.ems.API.ClientPojo.Client;
@@ -41,6 +44,19 @@ public class HistoryFragment extends Fragment {
     private APIClient apiClient = new APIClient();
     private Map<String, String> params = new HashMap<>();
 
+    long startMonth = DateUtils.getStartOfCurrentMonthInMillis();
+    long endMonth = DateUtils.getEndOfCurrentMonthInMillis();
+    long startWeek = DateUtils.getStartOfCurrentDayInMillis();
+    long endWeek = DateUtils.getEndOfCurrentMonthInMillis();
+    long startDay = DateUtils.getStartOfCurrentDayInMillis();
+    long endDay = DateUtils.getEndOfCurrentDayInMillis();
+
+    RadioGroup radioGroup;
+    String thisMonth = "This Month";
+    String thisWeek = "This Week";
+    String thisDay = "Today";
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -49,22 +65,44 @@ public class HistoryFragment extends Fragment {
         recyclerView.setAdapter(historyAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        WorkLogApiCall();
+        WorkLogApiCall(startMonth, endMonth);
+
+        radioGroup = view.findViewById(R.id.radio_group);
+
+        radioGroup.setOnCheckedChangeListener((RadioGroup group, int checkedId) -> {
+            RadioButton rb = group.findViewById(checkedId);
+            if (null != rb && checkedId > -1) {
+                Toast.makeText(getActivity(), rb.getText(), Toast.LENGTH_SHORT).show();
+                switch (checkedId) {
+                    case R.id.radio_month:
+                        WorkLogApiCall(startMonth, endMonth);
+                        break;
+                    case R.id.radio_week:
+                        WorkLogApiCall(startMonth, endMonth);
+                        break;
+                    case R.id.radio_day:
+                        WorkLogApiCall(startDay, endDay);
+                        break;
+                }
+
+
+            }
+
+        });
 
         return view;
     }
 
-    public void WorkLogApiCall() {
+
+    public void WorkLogApiCall(long start, long end) {
 
         String token = PreferenceManager.getDefaultSharedPreferences(getActivity()).getString("TOKEN", "Sorry Chap!");
         String businessTag = PreferenceManager.getDefaultSharedPreferences(getActivity()).getString("BUSINESS_TAG", "Sorry Chap!");
 
-        long startDay = DateUtils.getStartOfCurrentMonthInMillis();
-        long endDay = DateUtils.getEndOfCurrentMonthInMillis();
 
         params.put("t", token);
 
-        apiClient.getApiService().getWorkLog(businessTag,startDay, endDay, params).enqueue(new Callback<List<WorkLog>>() {
+        apiClient.getApiService().getWorkLog(businessTag, start, end, params).enqueue(new Callback<List<WorkLog>>() {
             @Override
             public void onResponse(Call<List<WorkLog>> call, Response<List<WorkLog>> response) {
                 List<WorkLog> workLog = response.body();
@@ -79,7 +117,7 @@ public class HistoryFragment extends Fragment {
         });
     }
 
-    public void getClientName(){
+    public void getClientName() {
         String token = PreferenceManager.getDefaultSharedPreferences(getActivity()).getString("TOKEN", "Sorry Chap!");
         String businessTag = PreferenceManager.getDefaultSharedPreferences(getActivity()).getString("BUSINESS_TAG", "Sorry Chap!");
 
@@ -89,8 +127,7 @@ public class HistoryFragment extends Fragment {
             @Override
             public void onResponse(Call<List<Client>> call, Response<List<Client>> response) {
                 List<Client> clients = response.body();
-                for(Client client : clients)
-                {
+                for (Client client : clients) {
                     PreferenceManager.getDefaultSharedPreferences(getActivity()).edit().putString(String.valueOf(client.getClientId()), client.getClientName()).apply();
                 }
             }

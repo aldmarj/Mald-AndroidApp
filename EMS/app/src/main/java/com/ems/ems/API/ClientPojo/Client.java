@@ -23,6 +23,9 @@ public class Client {
     @SerializedName("locations")
     @Expose
     private List<Locations> locations = null;
+    @SerializedName("hoursWorked")
+    @Expose
+    private Long hoursWorked;
 
     public String getBusinessTag() {
         return businessTag;
@@ -57,5 +60,12 @@ public class Client {
     }
 
 
+    public Long getHoursWorked() {
+        return hoursWorked;
+    }
+
+    public void setHoursWorked(Long hoursWorked) {
+        this.hoursWorked = hoursWorked;
+    }
 }
 
