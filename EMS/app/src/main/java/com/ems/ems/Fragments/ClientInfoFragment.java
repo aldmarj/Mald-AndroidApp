@@ -41,6 +41,7 @@ public class ClientInfoFragment extends Fragment implements RecViewClickListener
     private APIClient apiClient = new APIClient();
     private GoogleAPIClient googleApiClient = new GoogleAPIClient();
     private Map<String, String> params = new HashMap<>();
+    private Map<String, String> geoParams = new HashMap<>();
 
     double lat;
     double lng;
@@ -109,8 +110,10 @@ public class ClientInfoFragment extends Fragment implements RecViewClickListener
 
     private void googleLatLong(String clientLocation) {
 
-        String postcode = clientLocation + "&key=AIzaSyBok17yEyr1SeNcldrxJrEbkHyDpImRhgg";
-        googleApiClient.getApiService().getLatLong(postcode).enqueue(new Callback<GeoLocation>() {
+        String postcode = clientLocation.replaceAll("\\s+", "");;
+        geoParams.put("address", postcode);
+        geoParams.put("key","AIzaSyBok17yEyr1SeNcldrxJrEbkHyDpImRhgg");
+        googleApiClient.getApiService().getLatLong(geoParams).enqueue(new Callback<GeoLocation>() {
             @Override
             public void onResponse(Call<GeoLocation> call, Response<GeoLocation> response) {
 

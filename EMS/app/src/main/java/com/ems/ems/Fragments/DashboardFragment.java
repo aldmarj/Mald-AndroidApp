@@ -1,9 +1,13 @@
 package com.ems.ems.Fragments;
 
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 
 import android.util.Log;
@@ -13,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ems.ems.API.APIClient;
 import com.ems.ems.API.ClientPojo.Client;
@@ -21,9 +26,13 @@ import com.ems.ems.API.GooglePojo.GeoLocation;
 import com.ems.ems.API.WeatherAPIClient;
 import com.ems.ems.API.WeatherPojo.Weather;
 import com.ems.ems.API.WeatherPojo.WeatherCard;
+import com.ems.ems.Activities.AccountInfoActivity;
 import com.ems.ems.R;
 import com.ems.ems.Utils.DateUtils;
 import com.github.pavlospt.CircleView;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,6 +53,7 @@ public class DashboardFragment extends Fragment {
     private APIClient apiClient = new APIClient();
     private WeatherAPIClient weatherApiClient = new WeatherAPIClient();
     private Map<String, String> params = new HashMap<>();
+    private Map<String, String> weatherParams = new HashMap<>();
 
     //Views
     private TextView city;
@@ -64,6 +74,7 @@ public class DashboardFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_dashboard,
                 container, false);
 
+
         city = view.findViewById(R.id.city_country);
         weatherResult = view.findViewById(R.id.weather_result);
         weatherResultDescription = view.findViewById(R.id.weather_result);
@@ -79,6 +90,10 @@ public class DashboardFragment extends Fragment {
         return view;
 
     }
+
+
+
+
 
     private void topEmployee() {
         String token = PreferenceManager.getDefaultSharedPreferences(getActivity()).getString("TOKEN", "Sorry Chap!");
@@ -128,7 +143,15 @@ public class DashboardFragment extends Fragment {
 
     private void weatherForecast() {
 
-        weatherApiClient.getApiService().getWeather().enqueue(new Callback<WeatherCard>() {
+        String lat = PreferenceManager.getDefaultSharedPreferences(getActivity()).getString("CURRENTLAT", "Sorry Chap!");
+        String lng = PreferenceManager.getDefaultSharedPreferences(getActivity()).getString("CURRENTLONG", "Sorry Chap!");
+
+        weatherParams.put("lat", lat);
+        weatherParams.put("lon", lng);
+        weatherParams.put("units", "metric");
+        weatherParams.put("APPID","ea11946759095eabe7638933c7a344b6");
+
+        weatherApiClient.getApiService().getWeather(weatherParams).enqueue(new Callback<WeatherCard>() {
             @Override
             public void onResponse(Call<WeatherCard> call, Response<WeatherCard> response) {
 

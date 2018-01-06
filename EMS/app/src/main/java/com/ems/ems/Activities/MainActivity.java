@@ -1,17 +1,23 @@
 package com.ems.ems.Activities;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.ems.ems.Fragments.CalendarFragment;
 import com.ems.ems.Fragments.ClientInfoFragment;
@@ -25,9 +31,13 @@ import com.ems.ems.Listeners.DateListener;
 import com.ems.ems.Listeners.EndTimeListener;
 import com.ems.ems.Listeners.StartTimeListener;
 import com.ems.ems.R;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 public class MainActivity extends AppCompatActivity implements StartTimeListener, EndTimeListener, DateListener {
-    String start;
+    private FusedLocationProviderClient mFusedLocationClient;
 
 
     @Override
@@ -35,12 +45,13 @@ public class MainActivity extends AppCompatActivity implements StartTimeListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        createLocationRequest();
+        currentLocation();
 
         dashboardFragmentView();
 
 
-        String returnToken;
-        returnToken = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("TOKEN", "defaultStringIfNothingFound");
+
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.bottom_navigation);
@@ -109,12 +120,53 @@ public class MainActivity extends AppCompatActivity implements StartTimeListener
     }
 
     public void calendarFragment() {
-        Toolbar calendarToolbar = findViewById(R.id.my_toolbar);
-        setSupportActionBar(calendarToolbar);
-        calendarToolbar.setTitle("EMS - Client Locations");
 
-        ClientLocationFragment calendarFragment = new ClientLocationFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, calendarFragment).commit();
+        Intent mapsIntent = new Intent(this, MapsActivity.class);
+        startActivity(mapsIntent);
+    }
+
+    private void createLocationRequest() {
+        LocationRequest mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(10000);
+        mLocationRequest.setFastestInterval(5000);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+    }
+
+    private void currentLocation() {
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+
+            Toast.makeText(this, "Location not found", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        mFusedLocationClient.getLastLocation()
+                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        // Got last known location. In some rare situations this can be null.
+                        if (location != null) {
+                            // Logic to handle location object
+                            String msg = "Updated Location: " +
+                                    Double.toString(location.getLatitude()) + "," +
+                                    Double.toString(location.getLongitude());
+
+                            PreferenceManager.getDefaultSharedPreferences(MainActivity.this).edit().putString("CURRENTLAT", String.valueOf(location.getLatitude())).apply();
+                            PreferenceManager.getDefaultSharedPreferences(MainActivity.this).edit().putString("CURRENTLONG", String.valueOf(location.getLongitude())).apply();
+
+                            Log.d("Location: ", msg);
+
+                            Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 
     @Override

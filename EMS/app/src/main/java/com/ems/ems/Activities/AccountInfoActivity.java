@@ -25,7 +25,14 @@ public class AccountInfoActivity extends AppCompatActivity {
 
         createLocationRequest();
 
+        currentLocation();
 
+
+
+
+    }
+
+    private void currentLocation() {
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -57,8 +64,6 @@ public class AccountInfoActivity extends AppCompatActivity {
                         }
                     }
                 });
-
-
     }
 
     protected void createLocationRequest() {
