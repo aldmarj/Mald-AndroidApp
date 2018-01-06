@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ems.ems.API.ClientPojo.Client;
-import com.ems.ems.Adapters.ClickListeners.RecViewClickListener;
+import com.ems.ems.Listeners.RecViewClickListener;
 import com.ems.ems.R;
 
 import java.util.ArrayList;

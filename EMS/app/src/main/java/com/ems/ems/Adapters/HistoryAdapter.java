@@ -11,20 +11,27 @@ import android.widget.TextView;
 import com.ems.ems.API.WorkLogPojo.WorkLog;
 import com.ems.ems.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+
+import static java.util.Calendar.*;
 
 /**
  * Created by aldmar on 17/11/2017.
  */
 
-public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder>{
+public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder> {
+
 
     private List<WorkLog> items = new ArrayList<>();
     Context context;
 
     @Override
     public HistoryAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+
         context = parent.getContext();
         return new HistoryAdapter.ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_history, parent, false));
     }
@@ -62,14 +69,14 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
             workEndTime = itemView.findViewById(R.id.worklog_end_time);
         }
 
-        void bind(WorkLog item){
+        void bind(WorkLog item) {
 
-            if(PreferenceManager.getDefaultSharedPreferences(context).contains(item.getClientId())) {
+            if (PreferenceManager.getDefaultSharedPreferences(context).contains(item.getClientId())) {
                 clientName.setText(PreferenceManager.getDefaultSharedPreferences(context).getString(item.getClientId(), "Sorry Chap!"));
             }
             workDescription.setText(item.getDescription());
-            workStartTime.setText(item.getStartTime());
-            workEndTime.setText(item.getEndTime());
+            workStartTime.setText("");
+            workEndTime.setText("");
 
         }
     }

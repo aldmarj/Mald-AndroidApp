@@ -1,4 +1,4 @@
-package com.ems.ems.Adapters.ClickListeners;
+package com.ems.ems.Listeners;
 
 import android.content.Context;
 import android.support.design.widget.CoordinatorLayout;

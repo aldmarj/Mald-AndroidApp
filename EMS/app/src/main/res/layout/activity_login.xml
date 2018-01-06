@@ -36,20 +36,18 @@
             android:orientation="vertical"
             android:paddingTop="30dp">
 
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/edit_text_business_tag"
+
+                <Spinner
+                    android:id="@+id/business_spinner"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_business"
-                    android:drawableTint="#FF4081"
-                    android:singleLine="true"
-                    android:hint="Business Tag"
-                    android:inputType="textEmailAddress" />
-            </android.support.design.widget.TextInputLayout>
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginBottom="34dp"
+                    android:prompt="@string/wind" />
+
+
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"

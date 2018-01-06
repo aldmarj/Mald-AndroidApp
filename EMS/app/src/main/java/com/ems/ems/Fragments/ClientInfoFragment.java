@@ -20,7 +20,7 @@ import com.ems.ems.Activities.MapsActivity;
 import com.ems.ems.API.ClientPojo.Client;
 import com.ems.ems.Adapters.ClientInfoAdapter;
 import com.ems.ems.R;
-import com.ems.ems.Adapters.ClickListeners.RecViewClickListener;
+import com.ems.ems.Listeners.RecViewClickListener;
 
 import java.util.HashMap;
 import java.util.List;

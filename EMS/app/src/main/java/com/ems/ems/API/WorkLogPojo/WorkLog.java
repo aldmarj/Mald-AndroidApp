@@ -1,6 +1,9 @@
 package com.ems.ems.API.WorkLogPojo;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.Date;
 
 /**
  * Created by aldmar on 11/12/2017.
@@ -9,36 +12,26 @@ import com.google.gson.annotations.SerializedName;
 public class WorkLog {
 
     @SerializedName("businessTag")
+    @Expose
     private String businessTag;
-
-    // @SerializedName("clientName")
-    //private String clientName;
-
     @SerializedName("clientId")
+    @Expose
     private String clientId;
-
     @SerializedName("description")
+    @Expose
     private String description;
-
     @SerializedName("endTime")
-    private String endTime;
-
+    @Expose
+    private Long endTime;
     @SerializedName("startTime")
-    private String startTime;
-
+    @Expose
+    private Long startTime;
     @SerializedName("userName")
+    @Expose
     private String userName;
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    // @SerializedName("workLogId")
-    //private String workLogId;
+    @SerializedName("workLogId")
+    @Expose
+    private Integer workLogId;
 
     public String getBusinessTag() {
         return businessTag;
@@ -47,14 +40,6 @@ public class WorkLog {
     public void setBusinessTag(String businessTag) {
         this.businessTag = businessTag;
     }
-
-    //public String getClientName() {
-    //   return clientName;
-    //}
-
-    //public void setClientName(String clientName) {
-    //    this.clientName = clientName;
-    //}
 
     public String getClientId() {
         return clientId;
@@ -72,29 +57,36 @@ public class WorkLog {
         this.description = description;
     }
 
-    public String getEndTime() {
+    public Long getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(String endTime) {
+    public void setEndTime(Long endTime) {
         this.endTime = endTime;
     }
 
-    public String getStartTime() {
+    public Long getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(String startTime) {
+    public void setStartTime(Long startTime) {
         this.startTime = startTime;
     }
 
+    public String getUserName() {
+        return userName;
+    }
 
-    // public String getWorkLogId() {
-    // return workLogId;
-    //}
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
-    //public void setWorkLogId(String workLogId) {
-    // this.workLogId = workLogId;
-    //}
+    public Integer getWorkLogId() {
+        return workLogId;
+    }
+
+    public void setWorkLogId(Integer workLogId) {
+        this.workLogId = workLogId;
+    }
 
 }

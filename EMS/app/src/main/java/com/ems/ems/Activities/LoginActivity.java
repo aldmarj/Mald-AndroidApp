@@ -8,9 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.ems.ems.API.APIClient;
@@ -18,6 +21,7 @@ import com.ems.ems.API.BusinessPojo.Business;
 import com.ems.ems.R;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -27,12 +31,16 @@ import retrofit2.Response;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity  {
+public class LoginActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     /*
     Private API Client
      */
     private APIClient apiClient = new APIClient();
+
+    //Spinner & Business Array to Populate
+    Spinner businessSpinner;
+    ArrayList<String> businessesArray = new ArrayList<>();
 
 
     // UI references.
@@ -46,13 +54,17 @@ public class LoginActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        // Spinner element
+        businessSpinner = findViewById(R.id.business_spinner);
+        businessSpinner.setOnItemSelectedListener(this);
+
+        getBusinesses();
+
         Button mEmailSignInButton = (Button) findViewById(R.id.sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 //attemptLogin();
-                mBusinessTagView = findViewById(
-                        R.id.edit_text_business_tag);
                 mUsernameView = findViewById(R.id.edit_text_username);
                 mPasswordView = findViewById(R.id.edit_text_password);
 
@@ -61,16 +73,31 @@ public class LoginActivity extends AppCompatActivity  {
         });
 
 
-
-
     }
 
-    private void getApi() {
+    private void populateSpinner() {
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, businessesArray);
+
+        // Specify the layout to use when the list of choices appears
+        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // Apply the adapter to the spinner
+        businessSpinner.setAdapter(spinnerArrayAdapter);
+    }
+
+    private void getBusinesses() {
         apiClient.getApiService().getBusiness().enqueue(new Callback<List<Business>>() {
             @Override
             public void onResponse(Call<List<Business>> call, Response<List<Business>> response) {
-                Business business = response.body().get(0);
-                Log.d("aldmar: ", String.format("businessName = %s, businessTag = %s, ", business.getName(), business.getTag()));
+                List<Business> businesses = response.body();
+                if (businesses.size() != 0) {
+                    for (Business item : businesses) {
+                        businessesArray.add(item.getTag());
+                    }
+                    populateSpinner();
+                }
             }
 
             @Override
@@ -129,6 +156,16 @@ public class LoginActivity extends AppCompatActivity  {
 
 
         });
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }
 

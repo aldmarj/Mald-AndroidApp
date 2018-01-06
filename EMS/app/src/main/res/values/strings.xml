@@ -52,5 +52,12 @@
     <string name="permission_notice">This permission is important but you can as well set your location on Location page</string>
     <string name="go_to_location">Go to location setting</string>
 
+    <!-- Validation -->
+    <string name="name_error">Enter a valid name</string>
+    <string name="description_error">Enter a valid description</string>
+    <string name="postcode_error">Enter a valid postcode</string>
+    <string name="date_error">Enter a valid date</string>
+    <string name="time_error">Enter a valid time</string>
+
 
 </resources>
