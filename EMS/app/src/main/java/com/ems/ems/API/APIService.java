@@ -2,6 +2,7 @@ package com.ems.ems.API;
 
 import com.ems.ems.API.BusinessPojo.Business;
 import com.ems.ems.API.ClientPojo.Client;
+import com.ems.ems.API.EmployeePojo.Employee;
 import com.ems.ems.API.GooglePojo.GeoLocation;
 import com.ems.ems.API.WeatherPojo.WeatherCard;
 import com.ems.ems.API.WorkLogPojo.WorkLog;
@@ -42,8 +43,8 @@ public interface APIService {
                                      @Path("clientId") String clientId,
                                      @QueryMap(encoded = true) Map<String, String> params);
 
-    @GET("/business/{businessTag}/worklog/range/0/1")
-    Call<List<WorkLog>> getWorkLog(@Path("businessTag") String businessTag, @QueryMap(encoded = true) Map<String, String> params);
+    @GET("/business/{businessTag}/worklog/range/{startDay}/{endDay}")
+    Call<List<WorkLog>> getWorkLog(@Path("businessTag") String businessTag, @Path("startDay") Long startDay, @Path("endDay") Long endDay, @QueryMap(encoded = true) Map<String, String> params);
 
     @Headers("Content-Type:application/json; charset=UTF-8")
     @POST("/business/{businessTag}/worklog")
@@ -54,6 +55,10 @@ public interface APIService {
     @POST("/business/{businessTag}/client")
     Call<String> postClient(@Path("businessTag") String businessTag, @QueryMap(encoded = true) Map<String, String> params,
                           @Body String newClient);
+
+    @GET("/business/{businessTag}/employee/mostWorked/top/1/10/between/{startMonth}/{endMonth}")
+    Call<List<Employee>> getTopEmployees(@Path("businessTag") String businessTag, @Path("startMonth") Long startMonth,
+                                         @Path("endMonth") Long endMonth, @QueryMap(encoded = true) Map<String, String> params);
 
     @Headers("Content-Type:application/json; charset=UTF-8")
     @GET("maps/api/geocode/json")

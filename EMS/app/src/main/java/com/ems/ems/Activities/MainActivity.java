@@ -11,18 +11,23 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.Button;
 
 import com.ems.ems.Fragments.CalendarFragment;
 import com.ems.ems.Fragments.ClientInfoFragment;
+import com.ems.ems.Fragments.ClientLocationFragment;
 import com.ems.ems.Fragments.DashboardFragment;
 import com.ems.ems.Fragments.DatePickerFragment;
 import com.ems.ems.Fragments.HistoryFragment;
 import com.ems.ems.Fragments.LogWorkFragment;
 import com.ems.ems.Fragments.TimePickerFragment;
+import com.ems.ems.Listeners.DateListener;
+import com.ems.ems.Listeners.EndTimeListener;
+import com.ems.ems.Listeners.StartTimeListener;
 import com.ems.ems.R;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements StartTimeListener, EndTimeListener, DateListener {
+    String start;
 
 
     @Override
@@ -106,9 +111,9 @@ public class MainActivity extends AppCompatActivity {
     public void calendarFragment() {
         Toolbar calendarToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(calendarToolbar);
-        calendarToolbar.setTitle("EMS - Calendar");
+        calendarToolbar.setTitle("EMS - Client Locations");
 
-        CalendarFragment calendarFragment = new CalendarFragment();
+        ClientLocationFragment calendarFragment = new ClientLocationFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, calendarFragment).commit();
     }
 
@@ -143,13 +148,39 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showTimePickerDialog(View view) {
-        DialogFragment newFragment = new TimePickerFragment();
-        newFragment.show(getSupportFragmentManager(), "timePicker");
+        int id = view.getId();
+        TimePickerFragment newFragment = new TimePickerFragment();
+        if (id == R.id.log_start_time) {
+            newFragment.setFlag(TimePickerFragment.FLAG_START_TIME);
+            newFragment.show(getSupportFragmentManager(), "timePicker");
+        } else if (id == R.id.log_end_time) {
+            newFragment.setFlag(TimePickerFragment.FLAG_END_TIME);
+            newFragment.show(getSupportFragmentManager(), "timePicker");
+        }
+
     }
 
     public void showDatePickerDialog(View view) {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getSupportFragmentManager(), "datePicker");
+    }
+
+    @Override
+    public void endTimeSet(String time) {
+        Button textFragment = findViewById(R.id.log_end_time);
+        textFragment.setText(time);
+    }
+
+    @Override
+    public void startTimeSet(String time) {
+        Button textFragment = findViewById(R.id.log_start_time);
+        textFragment.setText(time);
+    }
+
+    @Override
+    public void dateSet(String date) {
+        Button textFragment = findViewById(R.id.log_date);
+        textFragment.setText(date);
     }
 }
 

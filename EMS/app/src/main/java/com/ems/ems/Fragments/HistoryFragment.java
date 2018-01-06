@@ -16,6 +16,7 @@ import com.ems.ems.API.ClientPojo.Client;
 import com.ems.ems.API.WorkLogPojo.WorkLog;
 import com.ems.ems.Adapters.HistoryAdapter;
 import com.ems.ems.R;
+import com.ems.ems.Utils.DateUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -58,9 +59,12 @@ public class HistoryFragment extends Fragment {
         String token = PreferenceManager.getDefaultSharedPreferences(getActivity()).getString("TOKEN", "Sorry Chap!");
         String businessTag = PreferenceManager.getDefaultSharedPreferences(getActivity()).getString("BUSINESS_TAG", "Sorry Chap!");
 
+        long startDay = DateUtils.getStartOfCurrentMonthInMillis();
+        long endDay = DateUtils.getEndOfCurrentMonthInMillis();
+
         params.put("t", token);
 
-        apiClient.getApiService().getWorkLog(businessTag, params).enqueue(new Callback<List<WorkLog>>() {
+        apiClient.getApiService().getWorkLog(businessTag,startDay, endDay, params).enqueue(new Callback<List<WorkLog>>() {
             @Override
             public void onResponse(Call<List<WorkLog>> call, Response<List<WorkLog>> response) {
                 List<WorkLog> workLog = response.body();
