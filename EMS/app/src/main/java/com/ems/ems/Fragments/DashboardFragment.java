@@ -193,7 +193,6 @@ public class DashboardFragment extends Fragment {
 
     }
 
-
     private void weatherForecast() {
 
         String lat = PreferenceManager.getDefaultSharedPreferences(getActivity()).getString("CURRENTLAT", "Sorry Chap!");
@@ -214,8 +213,8 @@ public class DashboardFragment extends Fragment {
                 city.setText((CharSequence) weatherCard.getName());
                 weatherResult.setTitleText(String.valueOf(weatherCard.getMain().getTemp()));
                 weatherResultDescription.setSubtitleText(weatherCard.getWeather().get(0).getDescription());
-                wind.setText(String.valueOf(weatherCard.getWind().getSpeed()));
-                humidity.setText(String.valueOf(weatherCard.getMain().getHumidity()));
+                wind.setText(String.valueOf(weatherCard.getWind().getSpeed()) + "Km/h");
+                humidity.setText(String.valueOf(weatherCard.getMain().getHumidity()) + "%");
 
             }
 

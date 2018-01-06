@@ -1,9 +1,14 @@
 package com.ems.ems.Activities;
 
+import android.content.Intent;
 import android.preference.PreferenceManager;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 
 import com.ems.ems.API.APIClient;
 import com.ems.ems.API.ClientPojo.Client;
@@ -29,7 +34,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
 
@@ -58,31 +63,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        Toolbar toolbar = findViewById(R.id.my_toolbar);
+
+        toolbar.setNavigationIcon(R.drawable.ic_action_back);
+
+        toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(),MainActivity.class)));
+
         clientApiCall();
 
-    }
-
-
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-
-        double lat = Double.parseDouble(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("Lat", "Sorry Chap!"));
-        double lng = Double.parseDouble(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("Long", "Sorry Chap!"));
-
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(lat, lng);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
 
     }
@@ -156,16 +145,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private void placeAMarkers() {
 
-        /*for (Double lat : latArray) {
-            for (Double lng : lngArray) {
-                LatLng SYDNEY = new LatLng(lat, lng);
-
-                clientMarker = mMap.addMarker(new MarkerOptions()
-                        .position(SYDNEY)
-                        .title("Sydney"));
-            }
-        }*/
-
         for (int i = 0; i < latArray.size(); i++) {
 
             LatLng position = new LatLng(latArray.get(i), lngArray.get(i));
@@ -179,5 +158,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
 
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

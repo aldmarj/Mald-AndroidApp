@@ -21,7 +21,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:text="Client Name"
+
                 android:textSize="30sp" />
 
             <TextView
@@ -30,23 +30,23 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/client_name"
-                android:text="Client Business Tag" />
+                />
 
             <TextView
                 android:id="@+id/client_location_Description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/client_business_tag"
-                android:text="Client Location Description" />
+                android:layout_below="@+id/client_business_tag"/>
+
 
             <TextView
                 android:id="@+id/client_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/client_location_Description"
-                android:text="PL4 8NL" />
+                android:layout_below="@+id/client_location_Description"/>
+
 
 
             <android.support.design.widget.FloatingActionButton

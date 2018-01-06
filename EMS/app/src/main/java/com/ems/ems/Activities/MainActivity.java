@@ -153,17 +153,8 @@ public class MainActivity extends AppCompatActivity implements StartTimeListener
                     public void onSuccess(Location location) {
                         // Got last known location. In some rare situations this can be null.
                         if (location != null) {
-                            // Logic to handle location object
-                            String msg = "Updated Location: " +
-                                    Double.toString(location.getLatitude()) + "," +
-                                    Double.toString(location.getLongitude());
-
                             PreferenceManager.getDefaultSharedPreferences(MainActivity.this).edit().putString("CURRENTLAT", String.valueOf(location.getLatitude())).apply();
                             PreferenceManager.getDefaultSharedPreferences(MainActivity.this).edit().putString("CURRENTLONG", String.valueOf(location.getLongitude())).apply();
-
-                            Log.d("Location: ", msg);
-
-                            Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
