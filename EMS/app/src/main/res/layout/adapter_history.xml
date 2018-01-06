@@ -32,20 +32,13 @@
                 android:layout_below="@+id/client_name"
                 android:text="Client Work Description" />
 
-            <TextView
-                android:id="@+id/worklog_location"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/client_work_description"
-                android:text="WorkLog Location" />
 
             <TextView
                 android:id="@+id/worklog_start_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/worklog_location"
+                android:layout_below="@+id/client_work_description"
                 android:text="Worklog StartTime" />
 
             <TextView
@@ -53,7 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_below="@+id/worklog_location"
+                android:layout_below="@+id/client_work_description"
                 android:text="Worklog EndTme" />
 
 

@@ -25,7 +25,7 @@ public class Employee {
     private Account account;
     @SerializedName("hoursWorked")
     @Expose
-    private Integer hoursWorked;
+    private Long hoursWorked;
     @SerializedName("businessTag")
     @Expose
     private String businessTag;
@@ -70,11 +70,11 @@ public class Employee {
         this.account = account;
     }
 
-    public Integer getHoursWorked() {
+    public Long getHoursWorked() {
         return hoursWorked;
     }
 
-    public void setHoursWorked(Integer hoursWorked) {
+    public void setHoursWorked(Long hoursWorked) {
         this.hoursWorked = hoursWorked;
     }
 

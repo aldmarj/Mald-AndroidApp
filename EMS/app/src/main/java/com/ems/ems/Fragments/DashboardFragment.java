@@ -61,12 +61,16 @@ public class DashboardFragment extends Fragment {
     private TextView humidity;
     private CircleView weatherResult;
     private CircleView weatherResultDescription;
-    private ListView firstNameList, surNameList, hoursWorkedList;
+    private ListView firstNameList, surNameList, hoursWorkedList, clientNameList, clientHoursList;
 
     //Top Employee Array Lists
     private ArrayList<String> firstNameArray = new ArrayList<>();
     private ArrayList<String> surNameArray = new ArrayList<>();
     private ArrayList<String> hoursWorkedArray = new ArrayList<>();
+
+    //Top Client Array Lists
+    private ArrayList<String> clientNameArray = new ArrayList<>();
+    private ArrayList<String> clientHoursArray = new ArrayList<>();
 
     @Nullable
     @Override
@@ -83,9 +87,12 @@ public class DashboardFragment extends Fragment {
         firstNameList = view.findViewById(R.id.top_employee_firstname);
         surNameList = view.findViewById(R.id.top_employee_surname);
         hoursWorkedList = view.findViewById(R.id.top_employee_hours_worked);
+        clientNameList = view.findViewById(R.id.top_client_name);
+        clientHoursList = view.findViewById(R.id.top_client_hours_worked);
 
         weatherForecast();
         topEmployee();
+        topClient();
 
         return view;
 
@@ -110,9 +117,10 @@ public class DashboardFragment extends Fragment {
                 List<Employee> employees = response.body();
                 if (employees.size() != 0) {
                     for (Employee employee : employees) {
+                        int hours = DateUtils.convertMillitoHours(employee.getHoursWorked());
                         firstNameArray.add(employee.getFirstName());
                         surNameArray.add(employee.getSurName());
-                        hoursWorkedArray.add(String.valueOf(employee.getHoursWorked()));
+                        hoursWorkedArray.add(String.valueOf(hours));
                     }
 
                     populateTopEmployeeList();
@@ -122,6 +130,39 @@ public class DashboardFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Employee>> call, Throwable t) {
+                Log.d("Client API error: ", t.getMessage());
+            }
+        });
+    }
+
+    private void topClient() {
+        String token = PreferenceManager.getDefaultSharedPreferences(getActivity()).getString("TOKEN", "Sorry Chap!");
+        String businessTag = PreferenceManager.getDefaultSharedPreferences(getActivity()).getString("BUSINESS_TAG", "Sorry Chap!");
+
+        long startMonth = DateUtils.getStartOfCurrentMonthInMillis();
+        long endMonth = DateUtils.getEndOfCurrentMonthInMillis();
+
+        params.put("t", token);
+
+        apiClient.getApiService().getTopClients(businessTag, startMonth, endMonth, params).enqueue(new Callback<List<Client>>() {
+            @Override
+            public void onResponse(Call<List<Client>> call, Response<List<Client>> response) {
+                List<Client> employees = response.body();
+                if (employees.size() != 0) {
+                    for (Client client : employees) {
+
+                        int hours = DateUtils.convertMillitoHours(client.getHoursWorked());
+                        clientNameArray.add(client.getClientName());
+                        clientHoursArray.add(String.valueOf(hours));
+                    }
+
+                    populateTopClientList();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Client>> call, Throwable t) {
                 Log.d("Client API error: ", t.getMessage());
             }
         });
@@ -140,6 +181,18 @@ public class DashboardFragment extends Fragment {
                 android.R.layout.simple_spinner_item, hoursWorkedArray);
         hoursWorkedList.setAdapter(hoursWorkedListArrayAdapter);
     }
+
+    private void populateTopClientList() {
+        ArrayAdapter<String> clientNameListArrayAdapter = new ArrayAdapter<>(getActivity(),
+                android.R.layout.simple_spinner_item, clientNameArray);
+        clientNameList.setAdapter(clientNameListArrayAdapter);
+
+        ArrayAdapter<String> clientHoursListArrayAdapter = new ArrayAdapter<>(getActivity(),
+                android.R.layout.simple_spinner_item, clientHoursArray);
+        clientHoursList.setAdapter(clientHoursListArrayAdapter);
+
+    }
+
 
     private void weatherForecast() {
 

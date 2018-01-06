@@ -60,6 +60,10 @@ public interface APIService {
     Call<List<Employee>> getTopEmployees(@Path("businessTag") String businessTag, @Path("startMonth") Long startMonth,
                                          @Path("endMonth") Long endMonth, @QueryMap(encoded = true) Map<String, String> params);
 
+    @GET("/business/{businessTag}/client/mostWorked/top/1/10/between/{startMonth}/{endMonth}")
+    Call<List<Client>> getTopClients(@Path("businessTag") String businessTag, @Path("startMonth") Long startMonth,
+                                         @Path("endMonth") Long endMonth, @QueryMap(encoded = true) Map<String, String> params);
+
     @Headers("Content-Type:application/json; charset=UTF-8")
     @GET("maps/api/geocode/json")
     Call<GeoLocation> getLatLong(@QueryMap Map<String, String> geoParams);
