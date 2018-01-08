@@ -58,6 +58,14 @@ public class TimePickerFragment extends DialogFragment
 
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         String time = Integer.toString(hourOfDay) + ":" + Integer.toString(minute);
+
+        if(hourOfDay < 10) {
+            time = "0" + Integer.toString(hourOfDay) + ":" + Integer.toString(minute);
+        }
+        if (minute < 10) {
+            time = "0" + Integer.toString(hourOfDay) + ":" + "0" + Integer.toString(minute);
+        }
+
         if (flag == FLAG_START_TIME) {
             this.startTimeListener.startTimeSet(time);
         }else if(flag == FLAG_END_TIME) {

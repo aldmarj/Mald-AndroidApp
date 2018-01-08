@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#5fb0c9"
+
     android:orientation="vertical"
     android:scrollbarAlwaysDrawVerticalTrack="true">
 
@@ -14,7 +14,7 @@
         android:layout_marginTop="22dp"
         android:gravity="center_horizontal"
         android:text="Account Login"
-        android:textColor="#fff"
+        android:textColor="@color/indigo"
         android:textSize="26sp"
         android:textStyle="bold" />
 
@@ -45,7 +45,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:layout_marginBottom="34dp"
-                    android:prompt="@string/wind" />
+                     />
 
 
 
@@ -93,7 +93,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="22dp"
-                android:background="#d67601"
+                android:background="@color/red"
                 android:text="Sign in"
                 android:textAllCaps="false"
                 android:textColor="#fff"

@@ -51,11 +51,8 @@ public class HistoryFragment extends Fragment {
     long startDay = DateUtils.getStartOfCurrentDayInMillis();
     long endDay = DateUtils.getEndOfCurrentDayInMillis();
 
-    RadioGroup radioGroup;
-    String thisMonth = "This Month";
-    String thisWeek = "This Week";
-    String thisDay = "Today";
 
+    RadioGroup radioGroup;
 
     @Nullable
     @Override
@@ -92,7 +89,6 @@ public class HistoryFragment extends Fragment {
 
         return view;
     }
-
 
     public void WorkLogApiCall(long start, long end) {
 
