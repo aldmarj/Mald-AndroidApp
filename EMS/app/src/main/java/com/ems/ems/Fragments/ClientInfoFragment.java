@@ -1,26 +1,23 @@
 package com.ems.ems.Fragments;
 
-import android.content.Intent;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.ems.ems.API.APIClient;
-import com.ems.ems.API.GooglePojo.GeoLocation;
-import com.ems.ems.API.GoogleAPIClient;
-import com.ems.ems.Activities.MapsActivity;
 import com.ems.ems.API.ClientPojo.Client;
+import com.ems.ems.API.GoogleAPIClient;
 import com.ems.ems.Adapters.ClientInfoAdapter;
 import com.ems.ems.R;
-import com.ems.ems.Listeners.RecViewClickListener;
 
 import java.util.HashMap;
 import java.util.List;
@@ -31,7 +28,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class ClientInfoFragment extends Fragment implements RecViewClickListener {
+public class ClientInfoFragment extends Fragment  {
     ClientInfoAdapter clientInfoAdapter = new ClientInfoAdapter();
 
 
@@ -55,8 +52,6 @@ public class ClientInfoFragment extends Fragment implements RecViewClickListener
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view_client_info);
         recyclerView.setAdapter(clientInfoAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        clientInfoAdapter.setClickListener(this);
-
 
         clientApiCall();
 
@@ -84,10 +79,13 @@ public class ClientInfoFragment extends Fragment implements RecViewClickListener
             @Override
             public void onResponse(Call<List<Client>> call, Response<List<Client>> response) {
                 List<Client> clients = response.body();
+                if(clients.size() != 0) {
                     clientInfoAdapter.setItems(clients);
-                for(Client client : clients)
-                {
-                    PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putString(String.valueOf(client.getClientId()), client.getClientName()).apply();
+                    for (Client client : clients) {
+                        PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putString(String.valueOf(client.getClientId()), client.getClientName()).apply();
+                    }
+                } else {
+                    Toast.makeText(getActivity(), "No Clients Found. Check Network Connection", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -98,45 +96,4 @@ public class ClientInfoFragment extends Fragment implements RecViewClickListener
         });
     }
 
-    @Override
-    public void onClick(int position, String clientLocation) {
-
-        googleLatLong(clientLocation);
-
-        Intent mapsIntent = new Intent(getActivity(), MapsActivity.class);
-        startActivity(mapsIntent);
-
-    }
-
-    private void googleLatLong(String clientLocation) {
-
-        String postcode = clientLocation.replaceAll("\\s+", "");;
-        geoParams.put("address", postcode);
-        geoParams.put("key","AIzaSyBok17yEyr1SeNcldrxJrEbkHyDpImRhgg");
-        googleApiClient.getApiService().getLatLong(geoParams).enqueue(new Callback<GeoLocation>() {
-            @Override
-            public void onResponse(Call<GeoLocation> call, Response<GeoLocation> response) {
-
-
-                Log.d("Google API Success: ", "We're In");
-                GeoLocation geoLocation = response.body();
-                if(geoLocation.getResults().size() != 0){
-                    lat = geoLocation.getResults().get(0).getGeometry().getLocation().getLat();
-                    lng = geoLocation.getResults().get(0).getGeometry().getLocation().getLng();
-
-                    PreferenceManager.getDefaultSharedPreferences(getActivity()).edit().putString("Lat", String.valueOf(lat)).apply();
-                    PreferenceManager.getDefaultSharedPreferences(getActivity()).edit().putString("Long", String.valueOf(lng)).apply();
-                    Log.d("Google API Location: ", clientLocation);
-                    Log.d("Google API Lat: ", PreferenceManager.getDefaultSharedPreferences(getActivity()).getString("Lat", "Sorry Chap!"));
-                    Log.d("Google API Long: ", PreferenceManager.getDefaultSharedPreferences(getActivity()).getString("Long", "Sorry Chap!"));
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<GeoLocation> call, Throwable t) {
-                Log.d("Google API error: ", t.getMessage());
-            }
-        });
-    }
 }

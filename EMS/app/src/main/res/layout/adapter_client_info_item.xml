@@ -48,17 +48,6 @@
                 android:layout_below="@+id/client_location_Description"/>
 
 
-
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fab_find_location"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/client_business_tag"
-                android:layout_alignParentRight="true"
-                android:src="@drawable/ic_find_location"
-                app:fabSize="mini"/>
-
-
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>

@@ -31,7 +31,7 @@
             android:id="@+id/action_calendar"
             android:enabled="true"
             android:icon="@drawable/ic_action_place"
-            android:title="@string/text_calendar"
+            android:title="@string/text_client_location"
             app:showAsAction="ifRoom" />
 
 </menu>

@@ -43,6 +43,7 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
     ArrayList<String> businessesArray = new ArrayList<>();
 
 
+
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mBusinessTagView;
@@ -53,6 +54,8 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        PreferenceManager.getDefaultSharedPreferences(this).getAll().clear();
 
         // Spinner element
         businessSpinner = findViewById(R.id.business_spinner);
@@ -108,7 +111,7 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
     }
 
     private void login() {
-
+        Context context = getApplicationContext();
         // Store values at the time of the login attempt.
         String businessTag = "cibusinesstag";//mBusinessTagView.getText().toString();
         String username = "ciusername";//mUsernameView.getText().toString();
@@ -123,22 +126,17 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
                 if (response.isSuccessful()) {
                     Log.d("Successful Response: ", String.format("Success User Token = %s", response.body()));
 
-                    Context context = getApplicationContext();
-                    CharSequence text = response.body();
-                    int duration = Toast.LENGTH_LONG;
-
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
-
                     PreferenceManager.getDefaultSharedPreferences(context).edit().putString("BUSINESS_TAG", businessTag).apply();
                     PreferenceManager.getDefaultSharedPreferences(context).edit().putString("TOKEN", response.body()).apply();
+                    PreferenceManager.getDefaultSharedPreferences(context).edit().putString("USERNAME", mUsernameView.getText().toString() ).apply();
+
 
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                 } else if (response.code() == 401) {
                     Log.d("401 response: ", String.format("Sorry Pal"));
                 } else {
-                    Context context = getApplicationContext();
+
                     CharSequence text = "Incorrect password or username.";
                     int duration = Toast.LENGTH_SHORT;
 
@@ -166,6 +164,11 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        //do nothing
     }
 }
 

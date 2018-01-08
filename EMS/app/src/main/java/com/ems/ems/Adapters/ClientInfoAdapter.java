@@ -17,7 +17,7 @@ import java.util.List;
 
 public class ClientInfoAdapter extends RecyclerView.Adapter<ClientInfoAdapter.ViewHolder>{
     private List<Client> items = new ArrayList<>();
-    private RecViewClickListener clickListener;
+
 
     @Override
     public ClientInfoAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -41,9 +41,6 @@ public class ClientInfoAdapter extends RecyclerView.Adapter<ClientInfoAdapter.Vi
         notifyItemRangeInserted(0, this.items.size());
     }
 
-    public void setClickListener(RecViewClickListener clickListener) {
-        this.clickListener = clickListener;
-    }
 
     class ViewHolder extends RecyclerView.ViewHolder {
         private TextView clientName;
@@ -62,6 +59,7 @@ public class ClientInfoAdapter extends RecyclerView.Adapter<ClientInfoAdapter.Vi
         }
 
         void bind(Client item){
+
             clientName.setText(item.getClientName());
             clientBusinessTag.setText(item.getBusinessTag());
 
@@ -70,17 +68,8 @@ public class ClientInfoAdapter extends RecyclerView.Adapter<ClientInfoAdapter.Vi
                 clientDescription.setText(item.getLocations().get(0).getDescription());
             }
 
-            FloatingActionButton myFab = itemView.findViewById(R.id.fab_find_location);
-            myFab.setOnClickListener(v -> findClientLocation());
-
         }
 
-        public void findClientLocation(){
-            String clientPosition = (String) clientLocation.getText();
-            if (clickListener != null) {
-                clickListener.onClick(getAdapterPosition(),clientPosition);
-            }
-        }
     }
 
 

@@ -1,13 +1,9 @@
 package com.ems.ems.Fragments;
 
 
-import android.Manifest;
-import android.content.pm.PackageManager;
-import android.location.Location;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 
 import android.util.Log;
@@ -17,22 +13,15 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ems.ems.API.APIClient;
 import com.ems.ems.API.ClientPojo.Client;
 import com.ems.ems.API.EmployeePojo.Employee;
-import com.ems.ems.API.GooglePojo.GeoLocation;
 import com.ems.ems.API.WeatherAPIClient;
-import com.ems.ems.API.WeatherPojo.Weather;
 import com.ems.ems.API.WeatherPojo.WeatherCard;
-import com.ems.ems.Activities.AccountInfoActivity;
 import com.ems.ems.R;
 import com.ems.ems.Utils.DateUtils;
 import com.github.pavlospt.CircleView;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;

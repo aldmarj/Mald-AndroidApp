@@ -69,7 +69,6 @@ public class HistoryFragment extends Fragment {
         radioGroup.setOnCheckedChangeListener((RadioGroup group, int checkedId) -> {
             RadioButton rb = group.findViewById(checkedId);
             if (null != rb && checkedId > -1) {
-                Toast.makeText(getActivity(), rb.getText(), Toast.LENGTH_SHORT).show();
                 switch (checkedId) {
                     case R.id.radio_month:
                         WorkLogApiCall(startMonth, endMonth);
@@ -81,8 +80,6 @@ public class HistoryFragment extends Fragment {
                         WorkLogApiCall(startDay, endDay);
                         break;
                 }
-
-
             }
 
         });
@@ -102,8 +99,13 @@ public class HistoryFragment extends Fragment {
             @Override
             public void onResponse(Call<List<WorkLog>> call, Response<List<WorkLog>> response) {
                 List<WorkLog> workLog = response.body();
-                getClientName();
-                historyAdapter.setItems(workLog);
+                if(workLog.size() != 0){
+                    getClientName();
+                    historyAdapter.setItems(workLog);
+                } else {
+                    Toast.makeText(getActivity(), "No Work Logs Found. Check Network Connection", Toast.LENGTH_SHORT).show();
+                }
+
             }
 
             @Override

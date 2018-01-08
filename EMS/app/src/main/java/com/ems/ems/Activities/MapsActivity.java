@@ -68,15 +68,20 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         toolbar.setNavigationIcon(R.drawable.ic_action_back);
 
-        toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(),MainActivity.class)));
+        toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), MainActivity.class)));
+
+        clientName.clear();
+        clientDescription.clear();
+        clientPostcode.clear();
 
         clientApiCall();
-
 
 
     }
 
     private void clientApiCall() {
+
+
         String token = PreferenceManager.getDefaultSharedPreferences(this).getString("TOKEN", "Sorry Chap!");
         String businessTag = PreferenceManager.getDefaultSharedPreferences(this).getString("BUSINESS_TAG", "Sorry Chap!");
 
@@ -89,14 +94,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 for (Client item : clients) {
                     if (item.getLocations().size() != 0) {
-
+                        clientName.add(item.getClientName());
                         clientDescription.add(item.getLocations().get(0).getDescription());
                         clientPostcode.add(item.getLocations().get(0).getPostCode());
 
                     }
-
-                    googleLatLong();
                 }
+                googleLatLong();
             }
 
             @Override
@@ -104,6 +108,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 Log.d("Client API error: ", t.getMessage());
             }
         });
+
+
     }
 
     private void googleLatLong() {
@@ -127,12 +133,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         latArray.add(geoLocation.getResults().get(0).getGeometry().getLocation().getLat());
                         lngArray.add(geoLocation.getResults().get(0).getGeometry().getLocation().getLng());
 
-                        placeAMarkers();
+
                         Log.d("Google API Location: ", "Lets ride it out");
                         Log.d("Google API Lat: ", String.valueOf(lat));
                         Log.d("Google API Long: ", String.valueOf(lng));
-
                     }
+                    placeAMarkers();
                 }
 
                 @Override
@@ -141,23 +147,23 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 }
             });
         }
+
     }
 
     private void placeAMarkers() {
+        if (latArray.size() == clientName.size()) {
+            for (int i = 0; i < clientName.size(); i++) {
+                String name = clientName.get(i);
+                LatLng position = new LatLng(latArray.get(i), lngArray.get(i));
+                mMap.addMarker(new MarkerOptions().position(position).title(name));
 
-        for (int i = 0; i < latArray.size(); i++) {
+                if (i == 0) {
+                    CameraPosition camPos = new CameraPosition(position, ZOOM_LEVEL, TILT_LEVEL, BEARING_LEVEL);
+                    mMap.moveCamera(CameraUpdateFactory.newCameraPosition(camPos));
 
-            LatLng position = new LatLng(latArray.get(i), lngArray.get(i));
-            mMap.addMarker(new MarkerOptions().position(position));
-
-            if (i == 0) {
-                CameraPosition camPos = new CameraPosition(position, ZOOM_LEVEL, TILT_LEVEL, BEARING_LEVEL);
-                mMap.moveCamera(CameraUpdateFactory.newCameraPosition(camPos));
-
+                }
             }
         }
-
-
     }
 
     @Override

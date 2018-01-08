@@ -139,19 +139,20 @@ public class LogWorkFragment extends Fragment implements AdapterView.OnItemSelec
         spinner.setAdapter(spinnerArrayAdapter);
     }
 
-
+// Place the user input into  the worklog model to be serialized
     private void addWorkEntry() {
 
         Context context = getActivity();
 
         String token = PreferenceManager.getDefaultSharedPreferences(context).getString("TOKEN", "Sorry Chap!");
         String businessTag = PreferenceManager.getDefaultSharedPreferences(context).getString("BUSINESS_TAG", "Sorry Chap!");
+        String username = PreferenceManager.getDefaultSharedPreferences(context).getString("USERNAME", "Sorry Chap!");
 
         worklog.setClientId(clientNameAndID.get(spinner.getSelectedItem().toString()));
         worklog.setDescription(String.valueOf(workDescription.getText()));
         worklog.setStartTime(startMillis);
         worklog.setEndTime(endMillis);
-        worklog.setUserName("ciusername");
+        worklog.setUserName(username);
         worklog.setBusinessTag(businessTag);
 
         Gson gson = new Gson();
@@ -218,7 +219,7 @@ public class LogWorkFragment extends Fragment implements AdapterView.OnItemSelec
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(getActivity(), "Validation Successfull", Toast.LENGTH_LONG).show();
+
     }
 
     @Override

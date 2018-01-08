@@ -2,6 +2,7 @@ package com.ems.ems.Activities;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -170,13 +171,9 @@ public class MainActivity extends AppCompatActivity implements StartTimeListener
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.account_info:
-                Intent accountInfoIntent = new Intent(MainActivity.this, AccountInfoActivity.class);
-                startActivity(accountInfoIntent);
-                return true;
-
             case R.id.sign_out:
-                //SharedPreferences.Editor.remove("TOKEN", getApplicationContext().MODE_PRIVATE).commit();
+                PreferenceManager.getDefaultSharedPreferences(this).getAll().clear();
+
 
                 Intent signOutIntent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(signOutIntent);
