@@ -30,14 +30,6 @@
                 android:text="This Week"
                 android:theme="@style/MyRadioButton" />
 
-            <RadioButton
-                android:id="@+id/radio_day"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:checked="false"
-                android:text="Today"
-                android:theme="@style/MyRadioButton" />
         </RadioGroup>
 
 

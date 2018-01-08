@@ -113,9 +113,9 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
     private void login() {
         Context context = getApplicationContext();
         // Store values at the time of the login attempt.
-        String businessTag = "cibusinesstag";//mBusinessTagView.getText().toString();
-        String username = "ciusername";//mUsernameView.getText().toString();
-        String password = "cipassword";//mPasswordView.getText().toString();
+        String businessTag = "Bayer";
+        String username = mUsernameView.getText().toString();
+        String password = mPasswordView.getText().toString();
 
 
         apiClient.getApiService().checkCredentials(businessTag, username, password).enqueue(new Callback<String>() {

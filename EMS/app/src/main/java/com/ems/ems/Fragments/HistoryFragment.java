@@ -74,9 +74,6 @@ public class HistoryFragment extends Fragment {
                         WorkLogApiCall(startMonth, endMonth);
                         break;
                     case R.id.radio_week:
-                        WorkLogApiCall(startMonth, endMonth);
-                        break;
-                    case R.id.radio_day:
                         WorkLogApiCall(startDay, endDay);
                         break;
                 }

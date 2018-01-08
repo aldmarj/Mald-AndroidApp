@@ -46,9 +46,6 @@ public class LogWorkFragment extends Fragment implements AdapterView.OnItemSelec
     private APIClient apiClient = new APIClient();
     private Map<String, String> params = new HashMap<>();
 
-    Calendar calander;
-    SimpleDateFormat simpledateformat;
-    String Date;
 
     Date startDate;
     Date endDate;
@@ -83,7 +80,7 @@ public class LogWorkFragment extends Fragment implements AdapterView.OnItemSelec
         //Find Input Fields By There ID
         clientName = view.findViewById(R.id.log_client_name);
         workDescription = view.findViewById(R.id.log_work_description);
-        postcode = view.findViewById(R.id.log_postcode);
+        postcode = view.findViewById(R.id.log_client_postcode);
         startTime = view.findViewById(R.id.log_start_time);
         endTime = view.findViewById(R.id.log_end_time);
         date = view.findViewById(R.id.log_date);
@@ -152,7 +149,7 @@ public class LogWorkFragment extends Fragment implements AdapterView.OnItemSelec
         worklog.setDescription(String.valueOf(workDescription.getText()));
         worklog.setStartTime(startMillis);
         worklog.setEndTime(endMillis);
-        worklog.setUserName(username);
+        worklog.setUserName("ciusername");
         worklog.setBusinessTag(businessTag);
 
         Gson gson = new Gson();

@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.ems.ems.API.APIClient;
@@ -37,11 +38,17 @@ public class AddClientFragment extends Fragment {
     private APIClient apiClient = new APIClient();
     private Map<String, String> params = new HashMap<>();
 
+    EditText clientNameText, clientDescriptionText, clientPostcodeText;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_client,
                 container, false);
+
+        clientNameText = view.findViewById(R.id.log_client_name);
+        clientDescriptionText = view.findViewById(R.id.log_client_description);
+        clientPostcodeText = view.findViewById(R.id.log_client_postcode);
 
         FloatingActionButton myFab = view.findViewById(R.id.add_client_fab);
         myFab.setOnClickListener(v -> addClient());
@@ -50,28 +57,32 @@ public class AddClientFragment extends Fragment {
     }
 
     private void addClient() {
+        Context context = getActivity();
+
         Client client = new Client();
         List<Locations> clientLocation = new ArrayList<>();
         Locations location = new Locations();
 
-        client.setClientName("Pddy Rafferty");
-        client.setBusinessTag("cibusinesstag");
-
-        location.setDescription("Morbi mollis finibus ullamcorper.");
-        location.setPostCode("NN7 2BT");
-
-        clientLocation.add(location);
-
-        client.setLocations(clientLocation);
+        String token = PreferenceManager.getDefaultSharedPreferences(context).getString("TOKEN", "Sorry Chap!");
+        String businessTag = PreferenceManager.getDefaultSharedPreferences(context).getString("BUSINESS_TAG", "Sorry Chap!");
 
 
-        Context context = getActivity();
+
+            client.setClientName(String.valueOf(clientNameText.getText()));
+            client.setBusinessTag(businessTag);
+
+            location.setDescription(String.valueOf(clientDescriptionText.getText()));
+            location.setPostCode(String.valueOf(clientPostcodeText.getText()));
+
+            clientLocation.add(location);
+
+            client.setLocations(clientLocation);
+
 
         Gson gson = new Gson();
         String body = gson.toJson(client);
 
-        String token = PreferenceManager.getDefaultSharedPreferences(context).getString("TOKEN", "Sorry Chap!");
-        String businessTag = PreferenceManager.getDefaultSharedPreferences(context).getString("BUSINESS_TAG", "Sorry Chap!");
+
 
         params.put("t", token);
 
@@ -85,9 +96,9 @@ public class AddClientFragment extends Fragment {
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
                 } else if (response.code() == 401) {
-                    Log.d("401 response: ", String.format("Sorry Pal cant post anything today"));
+                    Log.d("401 response: ", String.format("cant post client"));
                 } else {
-                    CharSequence text = "Why don't you like my DATA?!";
+                    CharSequence text = "Data not valid";
                     int duration = Toast.LENGTH_SHORT;
 
                     Toast toast = Toast.makeText(context, text, duration);
